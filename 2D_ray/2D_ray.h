@@ -39,9 +39,9 @@ typedef struct s_line
 
 typedef struct s_player
 {
-	float	fow;
 	t_p2	pos;
 	t_p2	dir;
+	float	fow;
 	t_ray	*cast_array;
 }				t_player;
 
