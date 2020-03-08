@@ -37,6 +37,14 @@ typedef struct s_line
 	t_p2 b;
 }				t_line;
 
+typedef struct s_player
+{
+	float	fow;
+	t_p2	pos;
+	t_p2	dir;
+	t_ray	*cast_array;
+}				t_player;
+
 t_line init_line(int x1, int y1, int x2, int y2);
 t_ray init_ray(int x1, int y1, int x2, int y2);
 void draw_line(SDL_Renderer *renderer, t_line line, int colour);
