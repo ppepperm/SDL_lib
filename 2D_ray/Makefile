@@ -14,8 +14,8 @@ NAME= 2D_ray
 SRC := kekush.c
 OBJ := $(patsubst %.c, %.o, $(SRC))
 CFLAGS := -Wall -Wextra -Werror -I includes
-LIB_FLAG :=  -L libft/ -lft  -L minilibx_macos -lmlx -framework OpenGL -framework AppKit -framework OpenCl
-LINUX_FLAG := -L libft/ -lft `sdl2-config --libs --cflags` -ggdb3 -O0 --std=c99 -lSDL2_image -l OpenCL -lm
+LIB_FLAG :=  -L libft/ -lft `sdl2-config --libs --cflags` -O0 -framework OpenCl
+LINUX_FLAG := -L libft/ -lft `sdl2-config --libs --cflags` -O0 -lSDL2_image -l OpenCL -lm
 INCLUDES := .
 
 all: $(NAME)
@@ -26,7 +26,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 		@make -C libft
-		@make -C minilibx_macos
 		@gcc -o $(NAME) $(CFLAGS) $(OBJ) $(LIB_FLAG)
 		@echo "DONE"
 
