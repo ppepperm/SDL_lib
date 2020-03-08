@@ -12,13 +12,14 @@
 
 #include "2D_ray.h"
 
-t_player	init_player(t_p2 pos, t_p2 dir, float fow)
+t_player	init_player(t_p2 pos, float dir, float fow)
 {
 	t_player player;
+	t_p2 rotor;
 
 	player.pos = pos;
 	player.dir = dir;
 	player.fow = fow;
-	return (t_player);
+	return (player);
 }
 

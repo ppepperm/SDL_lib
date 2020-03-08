@@ -14,6 +14,7 @@
 #define RAYY
 
 #include "SDL2/SDL.h"
+#include <math.h>
 #include "libft/includes/libft.h"
 
 #define WINDOW_WIDTH 1024
@@ -40,7 +41,7 @@ typedef struct s_line
 typedef struct s_player
 {
 	t_p2	pos;
-	t_p2	dir;
+	float	dir;
 	float	fow;
 	t_ray	*cast_array;
 }				t_player;
