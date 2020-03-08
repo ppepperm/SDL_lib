@@ -13,6 +13,8 @@
 #ifndef RAYY
 #define RAYY
 
+#include "SDL2/SDL.h"
+
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
 
@@ -33,5 +35,8 @@ typedef struct s_line
 	t_p2 a;
 	t_p2 b;
 }				t_line;
+
+t_line init_line(int x1, int y1, int x2, int y2);
+void draw_line(SDL_Renderer *renderer, t_line line, int colour);
 
 #endif
