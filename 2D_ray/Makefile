@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME= 2D_ray
-SRC := kekush.c line.c player.c
+SRC := kekush.c line.c player.c complex.c
 OBJ := $(patsubst %.c, %.o, $(SRC))
 CFLAGS := -Wall -Wextra -Werror -I includes
 LIB_FLAG :=  -L libft/ -lft `sdl2-config --libs --cflags` -O0 -framework OpenCl

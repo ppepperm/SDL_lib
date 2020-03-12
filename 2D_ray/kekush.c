@@ -19,23 +19,35 @@ int main(void) {
 	SDL_Renderer *renderer;
 	SDL_Window *window;
 	t_line line;
-	t_ray  ray;
+	t_line line2;
 	t_p2   cross;
-	int cast;
+	t_player pl;
+	int i;
 
+	i = 0;
+	pl = init_player(init_p2(100,100),160,100);
+	pl = pl;
 	line = init_line(0, 100, 200, 0);
-	ray = init_ray(0, 0, 30, 20);
+	line2 = init_line(100, 200, -200,100);
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("2D_ray", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
 	draw_line(renderer,line,255 * 256 * 256 + 255 * 256 + 255);
-	draw_ray(renderer, ray, 255*256*256);
-	cast = ray_cast(line, ray, &cross);
-	ray = init_ray(ray.st.x, ray.st.y, cross.x, cross.y);
-	draw_ray(renderer, ray, 255*256);
-	ft_putnbr(cast);
+	draw_line(renderer,line2,255 * 256 * 256 + 255 * 256 + 255);
+	while (i < RAYS_NUM)
+	{
+		ray_cast(line2, &(pl.cast_array[i]), &cross);
+		ray_cast(line, &(pl.cast_array[i]), &cross);
+		i++;
+	}
+	i = 0;
+	while (i < RAYS_NUM)
+	{
+		draw_ray(renderer,pl.cast_array[i], 255*256*256 + 256*255);
+		i++;
+	}
 	SDL_RenderPresent(renderer);
 	while (1) {
 		if (SDL_PollEvent(&event) && event.type == SDL_QUIT)

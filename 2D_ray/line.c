@@ -31,6 +31,7 @@ t_ray init_ray(int x1, int y1, int x2, int y2)
 	ray.st.y = y1;
 	ray.dir.x = x2;
 	ray.dir.y = y2;
+	ray.module = -1;
 	return (ray);
 }
 
@@ -46,21 +47,26 @@ void draw_ray(SDL_Renderer *renderer, t_ray ray, int colour)
 	SDL_RenderDrawLine(renderer, ray.st.x + WINDOW_WIDTH / 2,WINDOW_HEIGHT / 2 - ray.st.y, ray.dir.x + WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2  - ray.dir.y);
 }
 
-int ray_cast(t_line line, t_ray ray,t_p2 *p)
+int ray_cast(t_line line, t_ray *ray,t_p2 *p)
 {
 	float t;
 	float u;
 	float denom;
 
-	denom = (line.a.x - line.b.x)*(ray.st.y - ray.dir.y) - (line.a.y - line.b.y)*(ray.st.x - ray.dir.x);
+	denom = (line.a.x - line.b.x)*(ray->st.y - ray->dir.y) - (line.a.y - line.b.y)*(ray->st.x - ray->dir.x);
 	if (denom == 0)
 		return 0;
-	t = ((line.a.x - ray.st.x)*(ray.st.y - ray.dir.y) - (line.a.y - ray.st.y)*(ray.st.x - ray.dir.x)) / denom;
-	u = -1 * ((line.a.x - line.b.x)*(line.a.y - ray.st.y) - (line.a.y - line.b.y)*(line.a.x - ray.st.x)) / denom;
+	t = ((line.a.x - ray->st.x)*(ray->st.y - ray->dir.y) - (line.a.y - ray->st.y)*(ray->st.x - ray->dir.x)) / denom;
+	u = -1 * ((line.a.x - line.b.x)*(line.a.y - ray->st.y) - (line.a.y - line.b.y)*(line.a.x - ray->st.x)) / denom;
 	if (t >= 0 && t <= 1 && u >= 0)
 	{
 		p->x = line.a.x + t * (line.b.x - line.a.x);
 		p->y = line.a.y + t * (line.b.y - line.a.y);
+		if (ray->module == -1 || ((p->x - ray->st.x)*(p->x - ray->st.x) + (p->y - ray->st.y)*(p->y - ray->st.y) < ray->module))
+		{
+			ray->dir = *p;
+			ray->module = (ray->dir.x - ray->st.x)*(ray->dir.x - ray->st.x) + (ray->dir.y - ray->st.y)*(ray->dir.y - ray->st.y);
+		}
 		return 1;
 	}
 	return 0;
