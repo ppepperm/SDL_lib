@@ -20,7 +20,7 @@
 
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
-#define RAYS_NUM	61
+#define RAYS_NUM	90
 
 typedef struct s_p2
 {
@@ -68,7 +68,8 @@ t_p2	comp_dif(t_p2 z1, t_p2 z2);
 t_p2	comp_multiply(t_p2 z1, t_p2 z2);
 
 t_player	init_player(t_p2 pos, float dir, float fov);
-t_scene init_scene(t_player player);
+t_scene init_scene(t_player player,char *map_name);
 void  make_scene(t_scene *scene, SDL_Renderer *renderer);
+int get_num(int fd);
 
 #endif

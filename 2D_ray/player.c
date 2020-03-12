@@ -25,30 +25,53 @@ t_player	init_player(t_p2 pos, float dir, float fov)
 	player.dir = dir;
 	player.fov = fov;
 	rotor = init_p2(cos(fov/RAYS_NUM), sin(fov/RAYS_NUM));
-	view_comp = init_p2(cos(dir-fov/2)*5,sin(dir-fov/2)*5);
+	view_comp = init_p2(cos(dir-fov/2)*55,sin(dir-fov/2)*55);
 	player.cast_array = (t_ray*)malloc(sizeof(t_ray)*RAYS_NUM);
 	i = 0;
 	while (i < RAYS_NUM)
 	{
-		player.cast_array[i] = init_ray(player.pos.x, player.pos.y, player.pos.x + view_comp.x*5, player.pos.y + view_comp.y*5);
+		player.cast_array[i] = init_ray(player.pos.x, player.pos.y, player.pos.x + view_comp.x*10, player.pos.y + view_comp.y*10);
 		view_comp = comp_multiply(view_comp, rotor);
 		i++;
 	}
 	return (player);
 }
 
-t_scene init_scene(t_player player)
+t_scene init_scene(t_player player,char *map_name)
 {
 	t_scene scene;
+	char *str;
+	char **nums;
+	int fd;
+	int i;
 
 	scene.player = player;
-	scene.wall_num = 4;
+	fd = open(map_name,O_RDWR);
+	scene.wall_num = get_num(fd);
 	scene.map_array = (t_line*)malloc(sizeof(t_line)*scene.wall_num);
-	scene.map_array[0] = init_line(0,100,300,0);
-	scene.map_array[0] = init_line(300,0,0,-100);
-	scene.map_array[0] = init_line(0,-100,-300,0);
-	scene.map_array[0] = init_line(-300,0,0,100);
+	i = 0;
+	while (get_next_line(fd, &str))
+	{
+		nums = ft_strsplit(str, ' ');
+		scene.map_array[i++] = init_line(ft_atoi(nums[0]), ft_atoi(nums[1]), ft_atoi(nums[2]), ft_atoi(nums[3]));
+		free(nums[0]);
+		free(nums[1]);
+		free(nums[2]);
+		free(nums[3]);
+		free(nums);
+	}
 	return (scene);
+}
+
+int get_num(int fd)
+{
+	char *str;
+	int num;
+
+	get_next_line(fd, &str);
+	num = ft_atoi(str);
+	free(str);
+	return (num);
 }
 
 void  make_scene(t_scene *scene, SDL_Renderer *renderer)
