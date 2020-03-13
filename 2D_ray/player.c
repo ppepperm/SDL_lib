@@ -99,3 +99,9 @@ void  make_scene(t_scene *scene, SDL_Renderer *renderer)
 		j++;
 	}
 }
+
+void	change_pos(t_p2 pos, float dir, t_player *player)
+{
+	free(player->cast_array);
+	*player = init_player(pos, dir, FOV);
+}
