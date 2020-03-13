@@ -21,7 +21,7 @@ int main(void) {
 	SDL_Window *window;
 	t_player pl;
 	t_scene scene;
-	int i;
+	float i;
 
 	pl = init_player(init_p2(-90,-20),45,FOV);
 	scene = init_scene(pl, "map1.map");
@@ -41,7 +41,7 @@ int main(void) {
 		if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
 			break;
 		SDL_RenderClear(renderer);
-		change_pos(init_p2(0,0), 90 + i, &(scene.player));
+		change_pos(init_p2(80*cos(0.06*i + 10),40*sin(0.04*i)), 90 + 2*i, &(scene.player));
 		make_scene(&scene,renderer);
 		SDL_RenderPresent(renderer);
 		i+=1;
