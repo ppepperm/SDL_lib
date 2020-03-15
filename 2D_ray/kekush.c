@@ -35,17 +35,40 @@ int main(void) {
 	make_scene(&scene,renderer);
 	SDL_RenderPresent(renderer);
 	i = 0;
-	while (1)
+	float angle;
+	angle = 0;
+	while (!(SDL_PollEvent(&event) && event.type == SDL_QUIT))
 	{
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-		if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
-			break;
 		SDL_RenderClear(renderer);
-		change_pos(init_p2(80*cos(0.06*i + 10),40*sin(0.04*i)), 90 + 2*i, &(scene.player));
+		i+=0.5;
+		if (event.type == SDL_KEYDOWN)
+		{
+			if (event.key.keysym.scancode == SDL_SCANCODE_W)
+				scene.player.spd = init_p2(cos(scene.player.dir)*SPD, sin(scene.player.dir)*SPD);
+			if(event.key.keysym.scancode == SDL_SCANCODE_S)
+				scene.player.spd = init_p2(-cos(scene.player.dir)*SPD, -sin(scene.player.dir)*SPD);
+			if(event.key.keysym.scancode == SDL_SCANCODE_A)
+				angle += W_SPD;
+			if(event.key.keysym.scancode == SDL_SCANCODE_D)
+				angle -= W_SPD;
+		}
+		if (event.type == SDL_KEYUP)
+		{
+			if (event.key.keysym.scancode == SDL_SCANCODE_W)
+				scene.player.spd = init_p2(0,0);
+			else if(event.key.keysym.scancode == SDL_SCANCODE_S)
+				scene.player.spd = init_p2(0,0);
+			if(event.key.keysym.scancode == SDL_SCANCODE_A)
+				scene.player.w = 0;
+			if(event.key.keysym.scancode == SDL_SCANCODE_D)
+				scene.player.w = 0;
+		}
+		if (angle == 360)
+			angle = 0;
+		change_pos(comp_sum(scene.player.pos,scene.player.spd),angle, &(scene.player));
 		make_scene(&scene,renderer);
 		SDL_RenderPresent(renderer);
-		i+=1;
-		SDL_Delay(1);
 	}
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);

@@ -22,10 +22,12 @@ t_player	init_player(t_p2 pos, float dir, float fov)
 	dir *= 0.0174533;
 	fov *= 0.0174533;
 	player.pos = pos;
+	player.spd = init_p2(0,0);
+	player.w = 0;
 	player.dir = dir;
 	player.fov = fov;
 	rotor = init_p2(cos(fov/RAYS_NUM), sin(fov/RAYS_NUM));
-	view_comp = init_p2(cos(dir-fov/2)*55,sin(dir-fov/2)*55);
+	view_comp = init_p2(cos(dir-fov/2)*5,sin(dir-fov/2)*5);
 	player.cast_array = (t_ray*)malloc(sizeof(t_ray)*RAYS_NUM);
 	i = 0;
 	while (i < RAYS_NUM)
@@ -89,7 +91,7 @@ void  make_scene(t_scene *scene, SDL_Renderer *renderer)
 			ray_cast(scene->map_array[j], &(scene->player.cast_array[i]), &cross);
 			j++;
 		}
-		draw_ray(renderer,scene->player.cast_array[i], 255*256*256 + 256*255);
+		draw_ray(renderer,scene->player.cast_array[i], 255*256);
 		i++;
 	}
 	j = 0;

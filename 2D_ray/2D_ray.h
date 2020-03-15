@@ -18,11 +18,12 @@
 #include "libft/includes/libft.h"
 #include <fcntl.h>
 
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 480
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 640
 #define RAYS_NUM	90
 #define FOV			75
-
+#define SPD		3
+#define W_SPD	5
 typedef struct s_p2
 {
 	float x;
@@ -45,8 +46,10 @@ typedef struct s_line
 typedef struct s_player
 {
 	t_p2	pos;
+	t_p2	spd;
 	float	dir;
 	float	fov;
+	float	w;
 	t_ray	*cast_array;
 }				t_player;
 

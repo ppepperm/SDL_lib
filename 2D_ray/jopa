@@ -1,0 +1,23 @@
+if (event.type == SDL_KEYDOWN)
+		{
+			if (event.key.keysym.scancode == SDL_SCANCODE_W)
+				scene.player.forw = 1;
+			else if(event.key.keysym.scancode == SDL_SCANCODE_S)
+				scene.player.back = 1;
+		}
+		if (event.type == SDL_KEYUP)
+		{
+			if (event.key.keysym.scancode == SDL_SCANCODE_W)
+				scene.player.forw = 0;
+			else if(event.key.keysym.scancode == SDL_SCANCODE_S)
+				scene.player.back = 0;
+		}
+		scene.player.spd = init_p2(0,0);
+		if(scene.player.forw && !scene.player.back)
+			scene.player.spd = init_p2(cos(scene.player.dir)*SPD,cos(scene.player.dir)*SPD);
+		if(!scene.player.forw && scene.player.back)
+			scene.player.spd = init_p2(-cos(scene.player.dir)*SPD,-cos(scene.player.dir)*SPD);
+
+		change_pos(comp_sum(scene.player.pos, scene.player.spd),scene.player.dir, &(scene.player));
+		make_scene(&scene,renderer);
+		SDL_RenderPresent(renderer);
