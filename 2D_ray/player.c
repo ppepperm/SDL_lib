@@ -106,4 +106,5 @@ void	change_pos(t_p2 pos, float dir, t_player *player)
 {
 	free(player->cast_array);
 	*player = init_player(pos, dir, FOV);
+	printf("%f\n", player->dir);
 }

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 #include "2D_ray.h"
 #include <SDL2/SDL.h>
 
@@ -21,7 +20,7 @@ int main(void) {
 	SDL_Window *window;
 	t_player pl;
 	t_scene scene;
-	float i;
+	float angle;
 
 	pl = init_player(init_p2(-90,-20),45,FOV);
 	scene = init_scene(pl, "map1.map");
@@ -31,17 +30,11 @@ int main(void) {
 	SDL_RenderClear(renderer);
 	make_scene(&scene,renderer);
 	SDL_RenderPresent(renderer);
-	change_pos(init_p2(0,0), 90, &(scene.player));
-	make_scene(&scene,renderer);
-	SDL_RenderPresent(renderer);
-	i = 0;
-	float angle;
 	angle = 0;
 	while (!(SDL_PollEvent(&event) && event.type == SDL_QUIT))
 	{
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 		SDL_RenderClear(renderer);
-		i+=0.5;
 		if (event.type == SDL_KEYDOWN)
 		{
 			if (event.key.keysym.scancode == SDL_SCANCODE_W)
@@ -49,9 +42,9 @@ int main(void) {
 			if(event.key.keysym.scancode == SDL_SCANCODE_S)
 				scene.player.spd = init_p2(-cos(scene.player.dir)*SPD, -sin(scene.player.dir)*SPD);
 			if(event.key.keysym.scancode == SDL_SCANCODE_A)
-				angle += W_SPD;
+				 angle += W_SPD;
 			if(event.key.keysym.scancode == SDL_SCANCODE_D)
-				angle -= W_SPD;
+				 angle -= W_SPD;
 		}
 		if (event.type == SDL_KEYUP)
 		{
@@ -64,7 +57,7 @@ int main(void) {
 			if(event.key.keysym.scancode == SDL_SCANCODE_D)
 				scene.player.w = 0;
 		}
-		if (angle == 360)
+		if (angle == 360 || angle == -360)
 			angle = 0;
 		change_pos(comp_sum(scene.player.pos,scene.player.spd),angle, &(scene.player));
 		make_scene(&scene,renderer);

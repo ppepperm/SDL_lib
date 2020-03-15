@@ -17,6 +17,7 @@
 #include <math.h>
 #include "libft/includes/libft.h"
 #include <fcntl.h>
+#include <stdio.h>
 
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 640
