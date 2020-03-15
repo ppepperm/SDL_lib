@@ -35,6 +35,7 @@ int main(void) {
 	{
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 		SDL_RenderClear(renderer);
+		scene.player.spd = init_p2(0,0);
 		if (event.type == SDL_KEYDOWN)
 		{
 			if (event.key.keysym.scancode == SDL_SCANCODE_W)
@@ -60,6 +61,13 @@ int main(void) {
 		if (angle == 360 || angle == -360)
 			angle = 0;
 		change_pos(comp_sum(scene.player.pos,scene.player.spd),angle, &(scene.player));
+		printf("pr %f %f\n",scene.player.pos.x, scene.player.pos.y);
+		if (check_scene_collision(scene))
+		{
+			change_pos(init_p2(0,0),angle, &(scene.player));
+			printf("af %f %f\n",scene.player.pos.x, scene.player.pos.y);
+			scene.player.spd = init_p2(0,0);
+		}
 		make_scene(&scene,renderer);
 		SDL_RenderPresent(renderer);
 	}

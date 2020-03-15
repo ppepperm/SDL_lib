@@ -78,4 +78,7 @@ void  make_scene(t_scene *scene, SDL_Renderer *renderer);
 int get_num(int fd);
 void	change_pos(t_p2 pos, float dir, t_player *player);
 
+int	check_collision(t_line line, t_p2 pos);
+int check_scene_collision(t_scene scene);
+
 #endif

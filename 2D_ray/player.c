@@ -22,7 +22,6 @@ t_player	init_player(t_p2 pos, float dir, float fov)
 	dir *= 0.0174533;
 	fov *= 0.0174533;
 	player.pos = pos;
-	player.spd = init_p2(0,0);
 	player.w = 0;
 	player.dir = dir;
 	player.fov = fov;
@@ -105,6 +104,6 @@ void  make_scene(t_scene *scene, SDL_Renderer *renderer)
 void	change_pos(t_p2 pos, float dir, t_player *player)
 {
 	free(player->cast_array);
+	printf("ch %f %f\n",player->spd.x, player->spd.y);
 	*player = init_player(pos, dir, FOV);
-	printf("%f\n", player->dir);
 }
