@@ -21,12 +21,13 @@ int main(void) {
 	t_player pl;
 	t_scene scene;
 	float angle;
+	t_p2 coll_speed;
 
 	pl = init_player(init_p2(-90,-20),45,FOV);
 	scene = init_scene(pl, "map1.map");
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("2D_ray", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	SDL_RenderClear(renderer);
 	make_scene(&scene,renderer);
 	SDL_RenderPresent(renderer);
@@ -36,6 +37,7 @@ int main(void) {
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 		SDL_RenderClear(renderer);
 		scene.player.spd = init_p2(0,0);
+		coll_speed = init_p2(0,0);
 		if (event.type == SDL_KEYDOWN)
 		{
 			if (event.key.keysym.scancode == SDL_SCANCODE_W)
@@ -61,12 +63,12 @@ int main(void) {
 		if (angle == 360 || angle == -360)
 			angle = 0;
 		change_pos(comp_sum(scene.player.pos,scene.player.spd),angle, &(scene.player));
-		printf("pr %f %f\n",scene.player.pos.x, scene.player.pos.y);
-		if (check_scene_collision(scene))
+		//printf("pr %f %f\n",scene.player.pos.x, scene.player.pos.y);
+		if (check_scene_collision(scene, &coll_speed))
 		{
-			change_pos(init_p2(0,0),angle, &(scene.player));
-			printf("af %f %f\n",scene.player.pos.x, scene.player.pos.y);
-			scene.player.spd = init_p2(0,0);
+			coll_speed = comp_dif(coll_speed, scene.player.spd);
+			change_pos(comp_sum(scene.player.pos, coll_speed), angle, &(scene.player));
+			//printf("af %f %f\n",scene.player.pos.x, scene.player.pos.y);
 		}
 		make_scene(&scene,renderer);
 		SDL_RenderPresent(renderer);

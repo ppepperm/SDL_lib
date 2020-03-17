@@ -103,7 +103,11 @@ void  make_scene(t_scene *scene, SDL_Renderer *renderer)
 
 void	change_pos(t_p2 pos, float dir, t_player *player)
 {
+	t_p2 spd;
+
+	spd = player->spd;
 	free(player->cast_array);
-	printf("ch %f %f\n",player->spd.x, player->spd.y);
+	//printf("ch %f %f\n",player->spd.x, player->spd.y);
 	*player = init_player(pos, dir, FOV);
+	player->spd = spd;
 }
