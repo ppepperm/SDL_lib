@@ -22,9 +22,9 @@
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 640
 #define RAYS_NUM	90
-#define FOV			75
+#define FOV			90
 #define SPD		3
-#define W_SPD	5
+#define W_SPD	1
 
 typedef struct s_p2
 {

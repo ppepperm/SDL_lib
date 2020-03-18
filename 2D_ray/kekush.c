@@ -23,11 +23,11 @@ int main(void) {
 	float angle;
 	t_p2 coll_speed;
 
-	pl = init_player(init_p2(-90,-20),45,FOV);
+	pl = init_player(init_p2(-90,-20),0,FOV);
 	scene = init_scene(pl, "map1.map");
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("2D_ray", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC);
 	SDL_RenderClear(renderer);
 	make_scene(&scene,renderer);
 	SDL_RenderPresent(renderer);
