@@ -52,17 +52,23 @@ t_p2	get_collision_speed(t_line line, t_p2 spd)
 int check_scene_collision(t_scene scene, t_p2 *res_spd)
 {
 	int i;
+	int n;
 
 	i = 0;
+	n = 0;
 	while (i < scene.wall_num)
 	{
 		if (check_collision(scene.map_array[i], scene.player.pos))
 		{
  			*res_spd = get_collision_speed(scene.map_array[i], scene.player.spd);
+			n += 1;
+		}
+		if (n > 1)
+		{
+			*res_spd = init_p2(0,0);
 			return (1);
 		}
-		//printf("no collision\n");
 		i++;
 	}
-	return (0);
+	return (n);
 }
