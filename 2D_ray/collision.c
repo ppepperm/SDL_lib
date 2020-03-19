@@ -28,10 +28,7 @@ int	check_collision(t_line line, t_p2 pos)
 	s = sqrt((pa.x*pa.x + pa.y*pa.y)*(pb.x*pb.x + pb.y*pb.y))*sin;
 	s = s/sqrt((line.b.x-line.a.x)*(line.b.x-line.a.x) + (line.b.y-line.a.y)*(line.b.y-line.a.y));
 	if (cos < 0 && s <= 5)
-	{
-		//printf("%f %f\n", s, cos);
 		return (1);
-	}
 	return (0);
 }
 

@@ -19,12 +19,12 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#define WINDOW_WIDTH 1024
-#define WINDOW_HEIGHT 640
+#define WINDOW_WIDTH 1600
+#define WINDOW_HEIGHT 1080
 #define RAYS_NUM	90
 #define FOV			90
-#define SPD		3
-#define W_SPD	1
+#define SPD		2
+#define W_SPD	2
 
 typedef struct s_p2
 {
