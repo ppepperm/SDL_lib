@@ -77,12 +77,15 @@ int main(void) {
 		if (angle == 360 || angle == -360)
 			angle = 0;
 
-		change_pos(comp_sum(scene.player.pos,scene.player.spd),angle, &(scene.player));
+		//change_pos(comp_sum(scene.player.pos,scene.player.spd),angle, &(scene.player));
+		scene.player.pos = comp_sum(scene.player.pos,scene.player.spd);
 		if (check_scene_collision(scene, &coll_speed))
 		{
 			coll_speed = comp_dif(coll_speed, scene.player.spd);
-			change_pos(comp_sum(scene.player.pos, coll_speed), angle, &(scene.player));
+			scene.player.pos = comp_sum(scene.player.pos, coll_speed);
+			//change_pos(comp_sum(scene.player.pos, coll_speed), angle, &(scene.player));
 		}
+		change_pos(scene.player.pos, angle, &(scene.player));
 		make_scene(&scene,renderer);
 		SDL_RenderPresent(renderer);
 	}
