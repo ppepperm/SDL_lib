@@ -51,7 +51,6 @@ typedef struct s_player
 	t_p2	spd;
 	float	dir;
 	float	fov;
-	float	w;
 	t_ray	*cast_array;
 }				t_player;
 

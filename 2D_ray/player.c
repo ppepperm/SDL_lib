@@ -22,7 +22,7 @@ t_player	init_player(t_p2 pos, float dir, float fov)
 	dir *= 0.0174533;
 	fov *= 0.0174533;
 	player.pos = pos;
-	player.w = 0;
+	//printf("null\n");
 	player.dir = dir;
 	player.fov = fov;
 	rotor = init_p2(cos(fov/RAYS_NUM), sin(fov/RAYS_NUM));
@@ -103,11 +103,21 @@ void  make_scene(t_scene *scene, SDL_Renderer *renderer)
 
 void	change_pos(t_p2 pos, float dir, t_player *player)
 {
-	t_p2 spd;
+	t_p2 rotor;
+	t_p2 view_comp;
+	int i;
 
-	spd = player->spd;
-	free(player->cast_array);
-	//printf("ch %f %f\n",player->spd.x, player->spd.y);
-	*player = init_player(pos, dir, FOV);
-	player->spd = spd;
+	dir *= 0.0174533;
+	player->pos = pos;
+	player->dir = dir;
+	rotor = init_p2(cos(player->fov/RAYS_NUM), sin(player->fov/RAYS_NUM));
+	view_comp = init_p2(cos(player->dir-player->fov/2)*5,\
+	sin(player->dir-player->fov/2)*5);
+	i = 0;
+	while (i < RAYS_NUM)
+	{
+		player->cast_array[i] = init_ray(player->pos.x, player->pos.y, player->pos.x + view_comp.x*10, player->pos.y + view_comp.y*10);
+		view_comp = comp_multiply(view_comp, rotor);
+		i++;
+	}
 }
