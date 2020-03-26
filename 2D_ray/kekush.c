@@ -26,8 +26,9 @@ int main(void) {
 	int s = 0;
 	int a = 0;
 	int d = 0;
+	t_screen screen;
 
-	pl = init_player(init_p2(-90,-20),90,FOV);
+	pl = init_player(init_p2(-9,-2),90,FOV);
 	scene = init_scene(pl, "map1.map");
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("2D_ray", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
@@ -76,17 +77,18 @@ int main(void) {
 			angle -= W_SPD;
 		if (angle == 360 || angle == -360)
 			angle = 0;
-
-		//change_pos(comp_sum(scene.player.pos,scene.player.spd),angle, &(scene.player));
 		scene.player.pos = comp_sum(scene.player.pos,scene.player.spd);
 		if (check_scene_collision(scene, &coll_speed))
 		{
 			coll_speed = comp_dif(coll_speed, scene.player.spd);
 			scene.player.pos = comp_sum(scene.player.pos, coll_speed);
-			//change_pos(comp_sum(scene.player.pos, coll_speed), angle, &(scene.player));
 		}
 		change_pos(scene.player.pos, angle, &(scene.player));
 		make_scene(&scene,renderer);
+		screen = get_screen(scene);
+		normalize_screen(&screen);
+		draw_screen(screen, renderer);
+		//break;
 		SDL_RenderPresent(renderer);
 	}
 	SDL_DestroyRenderer(renderer);

@@ -35,16 +35,11 @@ t_ray init_ray(int x1, int y1, int x2, int y2)
 	return (ray);
 }
 
-void draw_line(SDL_Renderer *renderer, t_line line, int colour)
-{
-	SDL_SetRenderDrawColor(renderer, (colour>>16)%256, (colour>>8)%256, colour%256, 255);
-	SDL_RenderDrawLine(renderer, line.a.x + WINDOW_WIDTH / 2,WINDOW_HEIGHT / 2 - line.a.y, line.b.x + WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2  - line.b.y);
-}
-
 void draw_ray(SDL_Renderer *renderer, t_ray ray, int colour)
 {
 	SDL_SetRenderDrawColor(renderer, (colour>>16)%256, (colour>>8)%256, colour%256, 255);
-	SDL_RenderDrawLine(renderer, ray.st.x + WINDOW_WIDTH / 2,WINDOW_HEIGHT / 2 - ray.st.y, ray.dir.x + WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2  - ray.dir.y);
+	SDL_RenderDrawLine(renderer, ray.st.x+ WINDOW_WIDTH / 2,\
+	WINDOW_HEIGHT / 2 -  ray.st.y, ray.dir.x+ WINDOW_WIDTH / 2,WINDOW_HEIGHT / 2 - ray.dir.y);
 }
 
 int ray_cast(t_line line, t_ray *ray,t_p2 *p)

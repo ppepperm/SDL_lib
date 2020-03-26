@@ -26,12 +26,12 @@ t_player	init_player(t_p2 pos, float dir, float fov)
 	player.dir = dir;
 	player.fov = fov;
 	rotor = init_p2(cos(fov/RAYS_NUM), sin(fov/RAYS_NUM));
-	view_comp = init_p2(cos(dir-fov/2)*5,sin(dir-fov/2)*5);
+	view_comp = init_p2(cos(dir-fov/2)*50,sin(dir-fov/2)*50);
 	player.cast_array = (t_ray*)malloc(sizeof(t_ray)*RAYS_NUM);
 	i = 0;
 	while (i < RAYS_NUM)
 	{
-		player.cast_array[i] = init_ray(player.pos.x, player.pos.y, player.pos.x + view_comp.x*10, player.pos.y + view_comp.y*10);
+		player.cast_array[i] = init_ray(player.pos.x, player.pos.y, player.pos.x + view_comp.x*100, player.pos.y + view_comp.y*100);
 		view_comp = comp_multiply(view_comp, rotor);
 		i++;
 	}
@@ -96,7 +96,7 @@ void  make_scene(t_scene *scene, SDL_Renderer *renderer)
 	j = 0;
 	while (j < scene->wall_num)
 	{
-		draw_line(renderer,scene->map_array[j],255*256*256 + 256*255 + 255);
+		sdl_draw_line(renderer, scene->map_array[j].a, scene->map_array[j].b, 255*256*256 + 256*255 + 255);
 		j++;
 	}
 }
@@ -111,12 +111,12 @@ void	change_pos(t_p2 pos, float dir, t_player *player)
 	player->pos = pos;
 	player->dir = dir;
 	rotor = init_p2(cos(player->fov/RAYS_NUM), sin(player->fov/RAYS_NUM));
-	view_comp = init_p2(cos(player->dir-player->fov/2)*5,\
-	sin(player->dir-player->fov/2)*5);
+	view_comp = init_p2(cos(player->dir-player->fov/2)*50,\
+	sin(player->dir-player->fov/2)*50);
 	i = 0;
 	while (i < RAYS_NUM)
 	{
-		player->cast_array[i] = init_ray(player->pos.x, player->pos.y, player->pos.x + view_comp.x*10, player->pos.y + view_comp.y*10);
+		player->cast_array[i] = init_ray(player->pos.x, player->pos.y, player->pos.x + view_comp.x*100, player->pos.y + view_comp.y*100);
 		view_comp = comp_multiply(view_comp, rotor);
 		i++;
 	}

@@ -23,7 +23,7 @@
 #define WINDOW_HEIGHT 1080
 #define RAYS_NUM	90
 #define FOV			90
-#define SPD		2
+#define SPD		1
 #define W_SPD	2
 
 typedef struct s_p2
@@ -58,12 +58,19 @@ typedef struct s_scene
 {
 	t_player player;
 	t_line	*map_array;
+	t_p2	*vert_grid;
 	int		wall_num;
 }				t_scene;
 
+typedef struct s_screen
+{
+	t_p2	*vert_grid;
+	int		size;
+	float	center;
+}				t_screen;
+
 t_line init_line(int x1, int y1, int x2, int y2);
 t_ray init_ray(int x1, int y1, int x2, int y2);
-void draw_line(SDL_Renderer *renderer, t_line line, int colour);
 void draw_ray(SDL_Renderer *renderer, t_ray ray, int colour);
 int ray_cast(t_line line, t_ray *ray,t_p2 *p);
 
@@ -80,5 +87,12 @@ void	change_pos(t_p2 pos, float dir, t_player *player);
 
 int	check_collision(t_line line, t_p2 pos);
 int check_scene_collision(t_scene scene, t_p2 *res_spd);
+
+t_p2	init_sign(t_p2 st, t_p2 en);
+void sdl_draw_line(SDL_Renderer *renderer, t_p2 st, t_p2 en, int colour);
+
+t_screen	get_screen(t_scene scene);
+void normalize_screen(t_screen *screen);
+void draw_screen(t_screen screen, SDL_Renderer *renderer);
 
 #endif
