@@ -21,9 +21,9 @@
 
 #define W_H 640.0
 #define W_W 1080.0
-#define MAP_W 24
-#define MAP_H 24
-#define FOV	  100.0
+#define FOV	100.0
+#define SPD 0.1
+#define W   0.05
 
 typedef struct s_p2
 {
@@ -48,18 +48,27 @@ typedef struct s_player
 {
 	t_p2 pos;
 	t_p2 dir;
+	t_i2 mov;
+	int rot;
 }				t_player;
 
 typedef struct s_ray
 {
 	t_p2 dir;
 	t_p2 side;
-	t_p2 dir;
+	t_p2 delta;
 	t_i2 step;
 	t_i2 mp;
 	double phase;
 	int hit;
 }				t_ray;
+
+typedef struct s_map
+{
+	int **map;
+	t_i2 size;
+	t_i2 start;
+}				t_map;
 
 t_p2	init_p2(double x, double y);
 t_p2	comp_sum(t_p2 z1, t_p2 z2);
@@ -71,5 +80,9 @@ t_rgb init_rgb(unsigned char r, unsigned char g, unsigned char b);
 t_rgb mult_rgb(t_rgb colour, double k);
 
 t_player init_player(t_p2 pos, t_p2 dir);
+t_ray init_ray(t_player pl,t_map map, int x);
+void raycast(t_map map1, t_player pl, SDL_Renderer *renderer);
+
+t_map init_map(char *fname);
 
 #endif
