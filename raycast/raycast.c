@@ -30,12 +30,16 @@ int main()
 	SDL_RenderClear(renderer);
 	while (!(SDL_PollEvent(&event) && event.type == SDL_QUIT))
 	{
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+		SDL_SetRenderDrawColor(renderer, 20, 20, 20, 255);
 		SDL_RenderClear(renderer);
 		raycast(map1, pl, renderer);
 		SDL_RenderPresent(renderer);
 		if (event.type == SDL_KEYDOWN)
 		{
+			if (event.key.keysym.scancode == SDL_SCANCODE_F)
+			{
+				map1.map[(int)(map1.size.y - 1 - pl.pos.y) - 1][(int)(pl.pos.x)] = 1;
+			}
 			if (event.key.keysym.scancode == SDL_SCANCODE_W)
 				pl.mov.x = 1;
 			if(event.key.keysym.scancode == SDL_SCANCODE_S)

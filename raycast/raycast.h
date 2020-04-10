@@ -14,6 +14,7 @@
 #define RAYCAST_H
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <math.h>
 #include "libft/includes/libft.h"
 #include <fcntl.h>
@@ -21,9 +22,9 @@
 
 #define W_H 640.0
 #define W_W 1080.0
-#define FOV	100.0
+#define FOV	90.0
 #define SPD 0.1
-#define W   0.05
+#define W   0.04
 
 typedef struct s_p2
 {
