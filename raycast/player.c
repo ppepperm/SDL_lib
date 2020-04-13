@@ -91,20 +91,16 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer)
 		if (count.x == 0)
 		{
 			dist = ray.side.x * cos(ray.phase);
-			tex_x = pl.pos.y + dist*ray.dir.y;
+			tex_x = pl.pos.y + ray.side.x*ray.dir.y;
 			tex_x -= floor(tex_x);
-			//printf("%f\n",tex_x);
 		}
 		else
 		{
 			dist = ray.side.y * cos(ray.phase);
-			tex_x = pl.pos.x + dist*ray.dir.x;
+			tex_x = pl.pos.x + ray.side.y*ray.dir.x;
 			tex_x -= floor(tex_x);
-			//printf("%f\n", tex_x);
 		}
 		count.y = (int)(W_H/dist);
-		//if (count.y >= W_H)
-		//	count.y = (int)W_H;
 		if (map1.map[ray.mp.y][ray.mp.x] <= 5)
 		{
 			if (map1.map[ray.mp.y][ray.mp.x] == 1)
@@ -124,20 +120,11 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer)
 		}
 		if ( map1.map[ray.mp.y][ray.mp.x] > 5)
 		{
-			int tx =(int)(tex_x*63.0);
-			printf("%d %d \n", ray.mp.x,ray.mp.y );
-			//ft_putnbr(tx);
-			//ft_putchar(' ');
-			/*(if (tx == 32 || tx == 33 || tx == 34 || tx == 35 || tx == 36 || tx == 37)
-				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-			else
-				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-			SDL_RenderDrawLine(renderer,x, (W_H - count.y)/2, x, (W_H + count.y)/2);*/
 			dst.x = x;
 			dst.y = (W_H - count.y)/2;
 			dst.w = 1;
 			dst.h = count.y;
-			src.x = tx;
+			src.x = (int)(tex_x*63.0);
 			src.y = 0;
 			src.h = 64;
 			src.w = 1;
@@ -148,10 +135,6 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer)
 		}
 		x++;
 	}
-
-	//SDL_RenderCopy(renderer, tex, &src, &dst);
 	SDL_DestroyTexture(tex);
 	SDL_DestroyTexture(tex1);
-	//
-	//ft_putchar('\n');
 }
