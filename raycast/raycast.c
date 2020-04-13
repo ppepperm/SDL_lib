@@ -22,12 +22,13 @@ int main()
 	SDL_Window *window;
 
 	map1 = init_map("jopa.map");
-	pl = init_player(init_p2(map1.start.x,map1.start.y), init_p2(0, 1));
+	pl = init_player(init_p2(map1.start.x,map1.start.y), init_p2(sqrt(0.5), sqrt(0.5)));
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("2D_ray", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_W, W_H, 0);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC);
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
+	init_textures(&map1, renderer);
 	while (!(SDL_PollEvent(&event) && event.type == SDL_QUIT))
 	{
 		SDL_SetRenderDrawColor(renderer, 20, 20, 20, 255);

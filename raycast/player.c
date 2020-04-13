@@ -55,15 +55,8 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer)
 	t_i2 count;
 	t_ray ray;
 	double dist;
-	t_rgb colour;
 	SDL_Rect dst;
 	SDL_Rect src;
-	SDL_Surface* surface = IMG_Load("textures/eagle.png");
-	SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, surface);
-	SDL_FreeSurface(surface);
-	surface = IMG_Load("textures/wood.png");
-	SDL_Texture* tex1 = SDL_CreateTextureFromSurface(renderer, surface);
-	SDL_FreeSurface(surface);
 	double tex_x;
 
 	x = 0;
@@ -101,40 +94,17 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer)
 			tex_x -= floor(tex_x);
 		}
 		count.y = (int)(W_H/dist);
-		if (map1.map[ray.mp.y][ray.mp.x] <= 5)
-		{
-			if (map1.map[ray.mp.y][ray.mp.x] == 1)
-				colour = init_rgb(0, 0, 255);
-			else if (map1.map[ray.mp.y][ray.mp.x] == 2)
-				colour = init_rgb(0, 255, 0);
-			else if (map1.map[ray.mp.y][ray.mp.x] == 3)
-				colour = init_rgb(255, 0, 0);
-			else if (map1.map[ray.mp.y][ray.mp.x] == 4)
-				colour = init_rgb(255,255, 0);
-			else
-				colour = init_rgb(255,255,255);
-			if (count.x == 1)
-				colour = mult_rgb(colour, 2);
-			SDL_SetRenderDrawColor(renderer, colour.r, colour.g, colour.b, 255);
-			SDL_RenderDrawLine(renderer,x, (W_H - count.y)/2, x, (W_H + count.y)/2);
-		}
-		if ( map1.map[ray.mp.y][ray.mp.x] > 5)
-		{
-			dst.x = x;
-			dst.y = (W_H - count.y)/2;
-			dst.w = 1;
-			dst.h = count.y;
-			src.x = (int)(tex_x*63.0);
-			src.y = 0;
-			src.h = 64;
-			src.w = 1;
-			if ( map1.map[ray.mp.y][ray.mp.x] == 6)
-				SDL_RenderCopy(renderer, tex, &src, &dst);
-			if ( map1.map[ray.mp.y][ray.mp.x] == 7)
-				SDL_RenderCopy(renderer, tex1, &src, &dst);
-		}
+
+		dst.x = x;
+		dst.y = (W_H - count.y)/2;
+		dst.w = 1;
+		dst.h = count.y;
+		src.x = (int)(tex_x*63.0);
+		src.y = 0;
+		src.h = 64;
+		src.w = 1;
+		SDL_RenderCopy(renderer, map1.texs[map1.map[ray.mp.y][ray.mp.x] - 1],\
+		&src, &dst);
 		x++;
 	}
-	SDL_DestroyTexture(tex);
-	SDL_DestroyTexture(tex1);
 }

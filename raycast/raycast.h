@@ -69,6 +69,7 @@ typedef struct s_map
 	int **map;
 	t_i2 size;
 	t_i2 start;
+	SDL_Texture **texs;
 }				t_map;
 
 t_p2	init_p2(double x, double y);
@@ -85,5 +86,6 @@ t_ray init_ray(t_player pl,t_map map, int x);
 void raycast(t_map map1, t_player pl, SDL_Renderer *renderer);
 
 t_map init_map(char *fname);
+void init_textures(t_map *map, SDL_Renderer *renderer);
 
 #endif

@@ -24,6 +24,38 @@ void read_map(t_map *map,int fd)
 	}
 }
 
+void init_textures(t_map *map, SDL_Renderer *renderer)
+{
+	SDL_Surface *surface;
+
+	map->texs = (SDL_Texture**)malloc(sizeof(SDL_Texture*)*8);
+	surface = IMG_Load("textures/bluestone.png");
+	map->texs[0] = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
+	surface = IMG_Load("textures/colorstone.png");
+	map->texs[1] = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
+	surface = IMG_Load("textures/eagle.png");
+	map->texs[2] = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
+	surface = IMG_Load("textures/greystone.png");
+	map->texs[3] = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
+	surface = IMG_Load("textures/mossy.png");
+	map->texs[4] = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
+	surface = IMG_Load("textures/purplestone.png");
+	map->texs[5] = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
+	surface = IMG_Load("textures/redbrick.png");
+	map->texs[6] = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
+	surface = IMG_Load("textures/wood.png");
+	map->texs[7] = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
+
+}
+
 t_map init_map(char *fname)
 {
 	int fd;
