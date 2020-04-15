@@ -29,6 +29,7 @@ int main()
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
 	init_textures(&map1, renderer);
+	init_textures1(&map1, renderer);
 	while (!(SDL_PollEvent(&event) && event.type == SDL_QUIT))
 	{
 		SDL_SetRenderDrawColor(renderer, 20, 20, 20, 255);

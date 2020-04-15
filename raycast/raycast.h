@@ -20,8 +20,8 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#define W_H 640.0
-#define W_W 1080.0
+#define W_H 1080.0
+#define W_W 1600.0
 #define FOV	90.0
 #define SPD 0.1
 #define W   0.04
@@ -70,6 +70,7 @@ typedef struct s_map
 	t_i2 size;
 	t_i2 start;
 	SDL_Texture **texs;
+	SDL_Texture **texsd;
 }				t_map;
 
 t_p2	init_p2(double x, double y);
@@ -87,5 +88,6 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer);
 
 t_map init_map(char *fname);
 void init_textures(t_map *map, SDL_Renderer *renderer);
+void init_textures1(t_map *map, SDL_Renderer *renderer);
 
 #endif

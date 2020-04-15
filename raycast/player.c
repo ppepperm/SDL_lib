@@ -103,7 +103,11 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer)
 		src.y = 0;
 		src.h = 64;
 		src.w = 1;
-		SDL_RenderCopy(renderer, map1.texs[map1.map[ray.mp.y][ray.mp.x] - 1],\
+		if (count.x == 0)
+			SDL_RenderCopy(renderer, map1.texs[map1.map[ray.mp.y][ray.mp.x] - 1],\
+		&src, &dst);
+		else if (count.x == 1)
+			SDL_RenderCopy(renderer, map1.texsd[map1.map[ray.mp.y][ray.mp.x] - 1],\
 		&src, &dst);
 		x++;
 	}
