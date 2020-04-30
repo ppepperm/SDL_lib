@@ -20,9 +20,9 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#define W_H 1080.0
-#define W_W 1600.0
-#define FOV	90.0
+#define W_H 600.0
+#define W_W 800.0
+#define FOV	65.0
 #define SPD 0.1
 #define W   0.04
 
@@ -71,6 +71,7 @@ typedef struct s_map
 	t_i2 start;
 	SDL_Texture **texs;
 	SDL_Texture **texsd;
+	SDL_Window	*window;
 }				t_map;
 
 t_p2	init_p2(double x, double y);

@@ -30,12 +30,11 @@ int main()
 	SDL_RenderClear(renderer);
 	init_textures(&map1, renderer);
 	init_textures1(&map1, renderer);
+	map1.window = window;
 	while (!(SDL_PollEvent(&event) && event.type == SDL_QUIT))
 	{
-		SDL_SetRenderDrawColor(renderer, 20, 20, 20, 255);
+		SDL_SetRenderDrawColor(renderer, 60, 60, 60, 255);
 		SDL_RenderClear(renderer);
-		raycast(map1, pl, renderer);
-		SDL_RenderPresent(renderer);
 		if (event.type == SDL_KEYDOWN)
 		{
 			if (event.key.keysym.scancode == SDL_SCANCODE_F)
@@ -47,9 +46,9 @@ int main()
 			if(event.key.keysym.scancode == SDL_SCANCODE_S)
 				pl.mov.x = -1;
 			if(event.key.keysym.scancode == SDL_SCANCODE_A)
-				pl.rot = 1;//pl.dir = comp_multiply(pl.dir, init_p2(cos(0.1), sin(0.1)));
+				pl.rot = 1;
 			if(event.key.keysym.scancode == SDL_SCANCODE_D)
-				pl.rot = -1; //pl.dir = comp_multiply(pl.dir, init_p2(cos(-0.1), sin(-0.1));
+				pl.rot = -1;
 		}
 		if (event.type == SDL_KEYUP)
 		{
@@ -64,13 +63,15 @@ int main()
 		}
 		if (pl.mov.x != 0)
 		{
-			if (map1.map[map1.size.y - 1 - (int) pl.pos.y][(int) (pl.pos.x + pl.mov.x*pl.dir.x * SPD)] == 0)
+			if (map1.map[map1.size.y - 1 - (int) pl.pos.y][(int) (pl.pos.x +pl.dir.x*0.4*pl.mov.x+ pl.mov.x*pl.dir.x * SPD)] == 0)
 				pl.pos.x += pl.mov.x*pl.dir.x * SPD;
-			if (map1.map[map1.size.y - 1 - (int) (pl.pos.y + SPD * pl.dir.y * pl.mov.x)][(int) pl.pos.x] == 0)
+			if (map1.map[map1.size.y - 1 - (int) (pl.pos.y + pl.dir.y*0.4*pl.mov.x +SPD * pl.dir.y * pl.mov.x)][(int) pl.pos.x] == 0)
 				pl.pos.y += pl.mov.x*pl.dir.y * SPD;
 		}
 		if (pl.rot != 0)
 			pl.dir = comp_multiply(pl.dir, init_p2(cos(W * pl.rot), sin(W * pl.rot)));
+		raycast(map1, pl, renderer);
+		SDL_RenderPresent(renderer);
 	}
 
 	SDL_DestroyRenderer(renderer);
