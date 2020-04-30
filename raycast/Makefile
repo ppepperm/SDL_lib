@@ -10,12 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME= raycast
-SRC := complex.c raycast.c colour.c player.c map.c
+NAME = raycast
+SRC := main.c complex.c colour.c raycast.c map.c texture.c walls.c events.c
 OBJ := $(patsubst %.c, %.o, $(SRC))
 CFLAGS := -Wall -Wextra -Werror -I includes
 LIB_FLAG :=  -L libft/ -lft `sdl2-config --libs --cflags` -O0 -framework OpenCl
-LINUX_FLAG := -L libft/ -lft `sdl2-config --libs --cflags` -O0 -lSDL2_image -l OpenCL -lm
+LINUX_FLAG := -L libft/ -lft `sdl2-config --libs --cflags` -O0 -lSDL2_image -lm
 INCLUDES := .
 
 all: $(NAME)
@@ -26,7 +26,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 		@make -C libft
-		@gcc -o $(NAME) $(CFLAGS) $(OBJ) $(LIB_FLAG)
+		@gcc -o $(NAME) $(CFLAGS) $(OBJ) $(LINUX_FLAG)
 		@echo "DONE"
 
 LINUX : $(OBJ)

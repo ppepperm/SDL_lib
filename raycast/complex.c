@@ -36,7 +36,7 @@ t_p2	comp_multiply(t_p2 z1, t_p2 z2)
 	z1.y * z2.x + z1.x * z2.y));
 }
 
-double d_abs(double num)
+double	d_abs(double num)
 {
 	if (num < 0)
 		num *= -1;
