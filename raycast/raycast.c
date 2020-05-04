@@ -49,6 +49,20 @@ int main()
 				pl.rot = 1;
 			if(event.key.keysym.scancode == SDL_SCANCODE_D)
 				pl.rot = -1;
+			if(event.key.keysym.scancode == SDL_SCANCODE_G)
+			{
+				t_door *door;
+				if (map1.map[map1.size.y - 1 - (int) (pl.pos.y + (SPD + 1.2) * pl.dir.y)][(int)(pl.pos.x + pl.dir.x * (SPD + 1.2))] >= 9)
+				{
+					door = get_door(map1, (int)(pl.pos.x + pl.dir.x * (SPD + 1.2)),\
+					map1.size.y - 1 - (int) (pl.pos.y + (SPD + 1.2) * pl.dir.y));
+					if (door->status == OPENED)
+						door->status = CLOSING;
+					else if(door->status == CLOSED)
+						door->status = OPENING;
+				}
+			}
+
 		}
 		if (event.type == SDL_KEYUP)
 		{
@@ -70,6 +84,7 @@ int main()
 		}
 		if (pl.rot != 0)
 			pl.dir = comp_multiply(pl.dir, init_p2(cos(W * pl.rot), sin(W * pl.rot)));
+		doors_funk(map1.doors);
 		raycast(map1, pl, renderer);
 		SDL_RenderPresent(renderer);
 	}
