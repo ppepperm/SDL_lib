@@ -49,25 +49,6 @@ void doors_funk(t_door *doors)
 	}
 }
 
-void	dda(t_map map, t_ray *ray, t_i2 *count)
-{
-	while (ray->hit == 0)
-	{
-		if (ray->side.x < ray->side.y) {
-			ray->side.x += ray->delta.x;
-			ray->mp.x += ray->step.x;
-			count->x = 0;}
-		else {
-			ray->side.y += ray->delta.y;
-			ray->mp.y += ray->step.y;
-			count->x = 1;
-		}
-		if (map.map[ray->mp.y][ray->mp.x] != 0)
-			ray->hit = map.map[ray->mp.y][ray->mp.x];
-	}
-	ray->side = comp_dif(ray->side, ray->delta);
-}
-
 void	dist_texx_sq(double *tex_x, t_i2 *count, t_ray ray, t_player pl)
 {
 	double dist;
@@ -87,82 +68,91 @@ void	dist_texx_sq(double *tex_x, t_i2 *count, t_ray ray, t_player pl)
 	count->y = (int)(W_H/dist);
 }
 
-int	draw_doors(t_map map, t_ray ray, double tex_x, SDL_Renderer *renderer, int x, t_player pl)
+int	draw_doors(t_map map, t_ray *ray, double tex_x, SDL_Renderer *renderer, int x, t_player pl)
 {
 	t_p2 sw_ds;
 	t_door *door;
 	t_i2 count;
 	double dist;
 
-	if (map.map[ray.mp.y][ray.mp.x] == 9)
+	if (map.map[ray->mp.y][ray->mp.x] == 9)
 	{
-		door = get_door(map, ray.mp.x, ray.mp.y);
-		if (ray.dir.x > 0)
-		{
-			sw_ds.x = (1 - tex_x) * ray.delta.x;
-			sw_ds.y = 0.5 * ray.delta.y;
-		}
-		else
-		{
-			sw_ds.x = tex_x * ray.delta.x;
-			sw_ds.y = 0.5 * ray.delta.y;
-		}
+		door = get_door(map, ray->mp.x, ray->mp.y);
+		sw_ds = sw_ds_hor(tex_x, *ray);
 		if (sw_ds.y < sw_ds.x) {
-			ray.side.y += sw_ds.y;
-			dist = ray.side.y * cos(ray.phase);
+			ray->side.y += sw_ds.y;
+			dist = ray->side.y * cos(ray->phase);
 			count.x = 1;
 			count.y = (int) (W_H / dist);
-			tex_x = pl.pos.x + ray.side.y * ray.dir.x;
+			tex_x = pl.pos.x + ray->side.y * ray->dir.x;
 			tex_x -= floor(tex_x);
 			put_texture(renderer, count, x, tex_x, 9, map);
+			return (DONE);
 		}
 		else
 		{
-			ray.side.y += sw_ds.x;
-			dist = ray.side.y * cos(ray.phase);
+			ray->side.y += sw_ds.x;
+			dist = ray->side.y * cos(ray->phase);
 			count.x = 0;
 			count.y = (int) (W_H / dist);
-			tex_x = pl.pos.y + ray.side.y * ray.dir.y;
+			tex_x = pl.pos.y + ray->side.y * ray->dir.y;
 			tex_x -= floor(tex_x);
 			put_texture(renderer, count, x, tex_x, 10, map);
+			return (DONE);
 		}
 	}
-	else if (map.map[ray.mp.y][ray.mp.x] == 10)
+	else if (map.map[ray->mp.y][ray->mp.x] == 10)
 	{
-		door = get_door(map, ray.mp.x, ray.mp.y);
-		if (ray.dir.y > 0)
-		{
-			sw_ds.y = (1 - tex_x) * ray.delta.y;
-			sw_ds.x = 0.5 * ray.delta.x;
-		}
-		else
-		{
-			sw_ds.y = tex_x * ray.delta.y;
-			sw_ds.x = 0.5 * ray.delta.x;
-		}
+		door = get_door(map, ray->mp.x, ray->mp.y);
+		sw_ds = sw_dr_ver(tex_x, *ray);
 		if (sw_ds.x < sw_ds.y) {
-			ray.side.x += sw_ds.x;
-			dist = ray.side.x * cos(ray.phase);
+			ray->side.x += sw_ds.x;
+			dist = ray->side.x * cos(ray->phase);
 			count.x = 0;
 			count.y = (int) (W_H / dist);
-			tex_x = pl.pos.y + ray.side.x * ray.dir.y;
+			tex_x = pl.pos.y + ray->side.x * ray->dir.y;
 			tex_x -= floor(tex_x);
 			if (tex_x > 1.0 - door->len)
 			{
 				tex_x = tex_x - 1 + door->len;
 				put_texture(renderer, count, x, tex_x, 9, map);
+				return (DONE);
+			}
+			else
+			{
+				sw_ds = sw_dr_ver(tex_x, *ray);
+				if (sw_ds.x < sw_ds.y)
+				{
+					ray->side.x += sw_ds.x;
+					ray->mp.x += ray->step.x;
+				 	ray->hit = 0;
+					ray->side = comp_sum(ray->side, ray->delta);
+					return (GOING);
+				}
+				else
+				{
+					ray->side.x += sw_ds.y;
+					dist = ray->side.x * cos(ray->phase);
+					count.x = 1;
+					count.y = (int) (W_H / dist);
+					tex_x = pl.pos.x + ray->side.x * ray->dir.x;
+					tex_x -= floor(tex_x);
+					put_texture(renderer, count, x, tex_x, 10, map);
+					return (DONE);
+				}
 			}
 
 		}
 		else
 		{
-			ray.side.x += sw_ds.y;
-			dist = ray.side.x * cos(ray.phase);
+			ray->side.x += sw_ds.y;
+			dist = ray->side.x * cos(ray->phase);
 			count.x = 1;
 			count.y = (int) (W_H / dist);
-			tex_x = pl.pos.x + ray.side.x * ray.dir.x;
+			tex_x = pl.pos.x + ray->side.x * ray->dir.x;
 			tex_x -= floor(tex_x);
 			put_texture(renderer, count, x, tex_x, 10, map);
+			return (DONE);
 		}
 
 	}

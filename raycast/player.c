@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                            :+:      :+:    :+:  */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ppepperm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/08 12:08:08 by ppepperm          #+#    #+#             */
+/*   Updated: 2020/03/08 12:08:11 by ppepperm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raycast.h"
 
 t_player init_player(t_p2 pos, t_p2 dir)
@@ -68,6 +80,26 @@ void put_texture(SDL_Renderer *renderer, t_i2 count, int x, double tex_x, int ty
 		SDL_RenderCopy(renderer, map1.texsd[type - 1], &src, &dst);
 }
 
+void	dda(t_map map, t_ray *ray, t_i2 *count)
+{
+	while (ray->hit == 0)
+	{
+		if (ray->side.x < ray->side.y) {
+			ray->side.x += ray->delta.x;
+			ray->mp.x += ray->step.x;
+			count->x = 0;}
+		else {
+			ray->side.y += ray->delta.y;
+			ray->mp.y += ray->step.y;
+			count->x = 1;
+		}
+		if (map.map[ray->mp.y][ray->mp.x] != 0)
+			ray->hit = map.map[ray->mp.y][ray->mp.x];
+	}
+	ray->side = comp_dif(ray->side, ray->delta);
+}
+
+
 void raycast(t_map map1, t_player pl, SDL_Renderer *renderer)
 {
 	int x;
@@ -89,7 +121,8 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer)
 				put_texture(renderer, count, x, tex_x, map1.map[ray.mp.y][ray.mp.x], map1);
 				ray_status = DONE;
 			} else
-				ray_status = draw_doors(map1, ray, tex_x, renderer, x, pl);
+				ray_status = draw_doors(map1, &ray, tex_x, renderer, x, pl);
+			//ft_putnbr(ray_status);
 		}
 		x++;
 	}

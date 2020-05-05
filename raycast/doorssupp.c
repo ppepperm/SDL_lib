@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colour.c                                            :+:      :+:    :+:  */
+/*   doorssupp.c                                         :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppepperm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,17 +12,36 @@
 
 #include "raycast.h"
 
-t_rgb init_rgb(unsigned char r, unsigned char g, unsigned char b)
+t_p2	sw_ds_hor(double tex_x, t_ray ray)
 {
-	t_rgb colour;
+	t_p2 sw_ds;
 
-	colour.r = r;
-	colour.g = g;
-	colour.b = b;
-	return (colour);
+	if (ray.dir.x > 0)
+	{
+		sw_ds.x = (1 - tex_x) * ray.delta.x;
+		sw_ds.y = 0.5 * ray.delta.y;
+	}
+	else
+	{
+		sw_ds.x = tex_x * ray.delta.x;
+		sw_ds.y = 0.5 * ray.delta.y;
+	}
+	return (sw_ds);
 }
 
-t_rgb mult_rgb(t_rgb colour, double k)
+t_p2 sw_dr_ver(double tex_x, t_ray ray)
 {
-	return (init_rgb(colour.r/k, colour.g/k, colour.b/k));
+	t_p2 sw_ds;
+
+	if (ray.dir.y > 0)
+	{
+		sw_ds.y = (1 - tex_x) * ray.delta.y;
+		sw_ds.x = 0.5 * ray.delta.x;
+	}
+	else
+	{
+		sw_ds.y = tex_x * ray.delta.y;
+		sw_ds.x = 0.5 * ray.delta.x;
+	}
+	return (sw_ds);
 }

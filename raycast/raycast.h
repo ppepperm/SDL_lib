@@ -109,12 +109,15 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer);
 
 t_door *get_door(t_map map, int posx, int posy);
 void doors_funk(t_door *doors);
-int	 draw_doors(t_map map, t_ray ray, double tex_x, SDL_Renderer *renderer, int x, t_player pl);
+int	 draw_doors(t_map map, t_ray *ray, double tex_x, SDL_Renderer *renderer, int x, t_player pl);
 void	dda(t_map map, t_ray *ray, t_i2 *count);
 void	dist_texx_sq(double *tex_x, t_i2 *count, t_ray ray, t_player pl);
 
 t_map init_map(char *fname);
 void init_textures(t_map *map, SDL_Renderer *renderer);
 void init_textures1(t_map *map, SDL_Renderer *renderer);
+
+t_p2	sw_ds_hor(double tex_x, t_ray ray);
+t_p2	sw_dr_ver(double tex_x, t_ray ray);
 
 #endif
