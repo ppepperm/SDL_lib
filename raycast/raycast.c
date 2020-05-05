@@ -52,10 +52,10 @@ int main()
 			if(event.key.keysym.scancode == SDL_SCANCODE_SPACE)
 			{
 				t_door *door;
-				if (map1.map[map1.size.y - 1 - (int) (pl.pos.y + (SPD + 1.2) * pl.dir.y)][(int)(pl.pos.x + pl.dir.x * (SPD + 1.2))] >= 9)
+				if (map1.map[map1.size.y - 1 - (int) (pl.pos.y + (SPD + 1) * pl.dir.y)][(int)(pl.pos.x + pl.dir.x * (SPD + 1))] >= 9)
 				{
-					door = get_door(map1, (int)(pl.pos.x + pl.dir.x * (SPD + 1.2)),\
-					map1.size.y - 1 - (int) (pl.pos.y + (SPD + 1.2) * pl.dir.y));
+					door = get_door(map1, (int)(pl.pos.x + pl.dir.x * (SPD + 1)),\
+					map1.size.y - 1 - (int) (pl.pos.y + (SPD + 1) * pl.dir.y));
 					if (door->status == OPENED)
 						door->status = CLOSING;
 					else if(door->status == CLOSED)

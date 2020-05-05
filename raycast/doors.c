@@ -17,7 +17,9 @@ t_door *get_door(t_map map, int posx, int posy)
 	t_door *door;
 
 	while (!(map.doors->pos.x == posx && map.doors->pos.y == posy))
+	{
 		map.doors = map.doors->next;
+	}
 	door = map.doors;
 	return (door);
 }
