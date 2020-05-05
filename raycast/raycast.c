@@ -49,7 +49,7 @@ int main()
 				pl.rot = 1;
 			if(event.key.keysym.scancode == SDL_SCANCODE_D)
 				pl.rot = -1;
-			if(event.key.keysym.scancode == SDL_SCANCODE_G)
+			if(event.key.keysym.scancode == SDL_SCANCODE_SPACE)
 			{
 				t_door *door;
 				if (map1.map[map1.size.y - 1 - (int) (pl.pos.y + (SPD + 1.2) * pl.dir.y)][(int)(pl.pos.x + pl.dir.x * (SPD + 1.2))] >= 9)
@@ -77,9 +77,11 @@ int main()
 		}
 		if (pl.mov.x != 0)
 		{
-			if (map1.map[map1.size.y - 1 - (int) pl.pos.y][(int) (pl.pos.x +pl.dir.x*0.4*pl.mov.x+ pl.mov.x*pl.dir.x * SPD)] == 0)
+			if (map1.map[map1.size.y - 1 - (int) pl.pos.y][(int) (pl.pos.x +pl.dir.x*0.4*pl.mov.x+ pl.mov.x*pl.dir.x * SPD)] == 0 ||\
+			check_for_door(map1,(int) (pl.pos.x +pl.dir.x*0.4*pl.mov.x+ pl.mov.x*pl.dir.x * SPD), map1.size.y - 1 - (int) pl.pos.y) == 1)
 				pl.pos.x += pl.mov.x*pl.dir.x * SPD;
-			if (map1.map[map1.size.y - 1 - (int) (pl.pos.y + pl.dir.y*0.4*pl.mov.x +SPD * pl.dir.y * pl.mov.x)][(int) pl.pos.x] == 0)
+			if (map1.map[map1.size.y - 1 - (int) (pl.pos.y + pl.dir.y*0.4*pl.mov.x +SPD * pl.dir.y * pl.mov.x)][(int) pl.pos.x] == 0 ||\
+			check_for_door(map1, (int) pl.pos.x, map1.size.y - 1 - (int) (pl.pos.y + pl.dir.y*0.4*pl.mov.x +SPD * pl.dir.y * pl.mov.x)) == 1)
 				pl.pos.y += pl.mov.x*pl.dir.y * SPD;
 		}
 		if (pl.rot != 0)

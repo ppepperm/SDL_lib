@@ -17,7 +17,7 @@ t_door *get_door(t_map map, int posx, int posy)
 	t_door *door;
 
 	while (!(map.doors->pos.x == posx && map.doors->pos.y == posy))
-	map.doors = map.doors->next;
+		map.doors = map.doors->next;
 	door = map.doors;
 	return (door);
 }
@@ -86,8 +86,35 @@ int	draw_doors(t_map map, t_ray *ray, double tex_x, SDL_Renderer *renderer, int 
 			count.y = (int) (W_H / dist);
 			tex_x = pl.pos.x + ray->side.y * ray->dir.x;
 			tex_x -= floor(tex_x);
-			put_texture(renderer, count, x, tex_x, 9, map);
-			return (DONE);
+			if (tex_x > 1.0 - door->len)
+			{
+				tex_x = tex_x - 1 + door->len;
+				put_texture(renderer, count, x, tex_x, 9, map);
+				return (DONE);
+			}
+			else
+			{
+				sw_ds = sw_ds_hor(tex_x, *ray);
+				if (sw_ds.y < sw_ds.x)
+				{
+					ray->side.y += sw_ds.y;
+					ray->mp.y += ray->step.y;
+					ray->hit = 0;
+					ray->side = comp_sum(ray->side, ray->delta);
+					return (GOING);
+				}
+				else
+				{
+					ray->side.y += sw_ds.x;
+					dist = ray->side.y * cos(ray->phase);
+					count.x = 0;
+					count.y = (int) (W_H / dist);
+					tex_x = pl.pos.y + ray->side.y * ray->dir.y;
+					tex_x -= floor(tex_x);
+					put_texture(renderer, count, x, tex_x, 10, map);
+					return (DONE);
+				}
+			}
 		}
 		else
 		{

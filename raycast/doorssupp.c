@@ -45,3 +45,15 @@ t_p2 sw_dr_ver(double tex_x, t_ray ray)
 	}
 	return (sw_ds);
 }
+
+int	check_for_door(t_map map,int x, int y)
+{
+	t_door *door;
+
+	ft_putstr("no seg1\n");
+	door = get_door(map, x, y);
+	ft_putstr("no seg2\n");
+	if (door->status == OPENED && door)
+		return (1);
+	return (0);
+}

@@ -119,5 +119,6 @@ void init_textures1(t_map *map, SDL_Renderer *renderer);
 
 t_p2	sw_ds_hor(double tex_x, t_ray ray);
 t_p2	sw_dr_ver(double tex_x, t_ray ray);
+int		check_for_door(t_map map,int x, int y);
 
 #endif
