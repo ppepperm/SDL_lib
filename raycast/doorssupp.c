@@ -51,6 +51,8 @@ int	check_for_door(t_map map,int x, int y)
 	t_door *door;
 
 	door = get_door(map, x, y);
+	if (map.map[y][x] < 9)
+		return (0);
 	if (door->status == OPENED && door)
 		return (1);
 	return (0);
