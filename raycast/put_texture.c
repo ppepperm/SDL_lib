@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complex.c                                          :+:      :+:    :+:   */
+/*   raycast.c                                           :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppepperm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/06 13:53:39 by ppepperm          #+#    #+#             */
-/*   Updated: 2020/01/06 13:53:41 by ppepperm         ###   ########.fr       */
+/*   Created: 2020/03/08 12:08:08 by ppepperm          #+#    #+#             */
+/*   Updated: 2020/03/08 12:08:11 by ppepperm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycast.h"
 
-t_p2	init_p2(double x, double y)
+void		put_skybox(SDL_Renderer *renderer, t_map data, t_player player)
 {
-	t_p2 p2;
-	p2.x = x;
-	p2.y = y;
-	return (p2);
-}
+	SDL_Rect	dst;
+	SDL_Rect	src;
+	double		angle;
 
-t_p2	comp_sum(t_p2 z1, t_p2 z2)
-{
-	return (init_p2(z1.x + z2.x, z1.y + z2.y));
-}
+	angle = acos(comp_dot(init_p2(0, 1), player.dir)) * 57.2957795131;
+	if (player.dir.x < 0)
+	{
+		angle = 180 + (180 - angle);
+	}
+	src.x = angle;
+	src.y = 0;
+	src.w = 360;
+	src.h = 90;
 
-t_p2	comp_dif(t_p2 z1, t_p2 z2)
-{
-	return (init_p2(z1.x - z2.x, z1.y - z2.y));
-}
-
-t_p2	comp_multiply(t_p2 z1, t_p2 z2)
-{
-	return (init_p2(z1.x * z2.x - z1.y * z2.y,\
-	z1.y * z2.x + z1.x * z2.y));
+	dst.x = 0;
+	dst.y = 0;
+	dst.w = W_W;
+	dst.h = W_H / 2;
+	SDL_RenderCopy(renderer, data.skybox, &src, &dst);
 }

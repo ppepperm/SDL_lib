@@ -71,6 +71,7 @@ typedef struct s_map
 	t_i2 start;
 	SDL_Texture **texs;
 	SDL_Texture **texsd;
+	SDL_Texture		*skybox;
 	SDL_Window	*window;
 }				t_map;
 
@@ -78,10 +79,12 @@ t_p2	init_p2(double x, double y);
 t_p2	comp_sum(t_p2 z1, t_p2 z2);
 t_p2	comp_dif(t_p2 z1, t_p2 z2);
 t_p2	comp_multiply(t_p2 z1, t_p2 z2);
-double d_abs(double num);
+double	comp_dot(t_p2 z1, t_p2 z2);
+double	d_abs(double num);
 
 t_rgb init_rgb(unsigned char r, unsigned char g, unsigned char b);
 t_rgb mult_rgb(t_rgb colour, double k);
+void		put_skybox(SDL_Renderer *renderer, t_map data, t_player player);
 
 t_player init_player(t_p2 pos, t_p2 dir);
 t_ray init_ray(t_player pl,t_map map, int x);
@@ -90,5 +93,6 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer);
 t_map init_map(char *fname);
 void init_textures(t_map *map, SDL_Renderer *renderer);
 void init_textures1(t_map *map, SDL_Renderer *renderer);
+void		init_skybox(t_map *data, SDL_Renderer *renderer);
 
 #endif

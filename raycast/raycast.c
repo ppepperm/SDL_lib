@@ -30,6 +30,7 @@ int main()
 	SDL_RenderClear(renderer);
 	init_textures(&map1, renderer);
 	init_textures1(&map1, renderer);
+	init_skybox(&map1, renderer);
 	map1.window = window;
 	while (!(SDL_PollEvent(&event) && event.type == SDL_QUIT))
 	{
@@ -70,6 +71,7 @@ int main()
 		}
 		if (pl.rot != 0)
 			pl.dir = comp_multiply(pl.dir, init_p2(cos(W * pl.rot), sin(W * pl.rot)));
+		put_skybox(renderer, map1, pl);
 		raycast(map1, pl, renderer);
 		SDL_RenderPresent(renderer);
 	}

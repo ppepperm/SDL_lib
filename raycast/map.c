@@ -24,6 +24,15 @@ void read_map(t_map *map,int fd)
 	}
 }
 
+void		init_skybox(t_map *data, SDL_Renderer *renderer)
+{
+	SDL_Surface	*surface;
+
+	surface = IMG_Load("textures/skybox720.png");
+	data->skybox = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
+}
+
 void init_textures(t_map *map, SDL_Renderer *renderer)
 {
 	SDL_Surface *surface;
