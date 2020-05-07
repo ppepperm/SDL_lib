@@ -118,7 +118,12 @@ void init_textures(t_map *map, SDL_Renderer *renderer);
 void init_textures1(t_map *map, SDL_Renderer *renderer);
 
 t_p2	sw_ds_hor(double tex_x, t_ray ray);
-t_p2	sw_dr_ver(double tex_x, t_ray ray);
+t_p2	sw_ds_ver(double tex_x, t_ray ray);
 int		check_for_door(t_map map,int x, int y);
+
+int		draw_vert_ds(t_ray *ray, t_map map, SDL_Renderer *renderer, double tex_x, t_player pl, int x);
+int		draw_hor_ds(t_ray *ray, t_map map, SDL_Renderer *renderer, double tex_x, t_player pl, int x);
+void	hor_perp(t_ray *ray, t_player pl, double *tex_x, double *dist, t_i2 *count);
+void 	ver_perp(t_ray *ray, t_player pl, double *tex_x, double *dist, t_i2 *count);
 
 #endif

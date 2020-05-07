@@ -29,7 +29,7 @@ t_p2	sw_ds_hor(double tex_x, t_ray ray)
 	return (sw_ds);
 }
 
-t_p2 sw_dr_ver(double tex_x, t_ray ray)
+t_p2 sw_ds_ver(double tex_x, t_ray ray)
 {
 	t_p2 sw_ds;
 

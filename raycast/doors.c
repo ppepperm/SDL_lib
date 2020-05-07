@@ -29,15 +29,15 @@ void doors_funk(t_door *doors)
 		if ((doors->len == 1) && (doors->status == CLOSING))
 			doors->status = CLOSED;
 		else if ((doors->len > 0) && (doors->status == OPENING))
-			doors->len -= 0.01;
+			doors->len -= 0.02;
 		else if ((doors->len != 1) && (doors->status == CLOSING))
-			doors->len += 0.01;
+			doors->len += 0.02;
 		else if ((doors->len < 0.01) && (doors->status == 3))
 			doors->status = OPENED;
 
 		if (doors->status == OPENED)
 		{
-			if(doors->time == 200)
+			if(doors->time == 300)
 			{
 				doors->time = 0;
 				doors->status = CLOSING;
@@ -75,17 +75,12 @@ int	draw_doors(t_map map, t_ray *ray, double tex_x, SDL_Renderer *renderer, int 
 	t_i2 count;
 	double dist;
 
+	door = get_door(map, ray->mp.x, ray->mp.y);
 	if (map.map[ray->mp.y][ray->mp.x] == 9)
 	{
-		door = get_door(map, ray->mp.x, ray->mp.y);
 		sw_ds = sw_ds_hor(tex_x, *ray);
 		if (sw_ds.y < sw_ds.x) {
-			ray->side.y += sw_ds.y;
-			dist = ray->side.y * cos(ray->phase);
-			count.x = 1;
-			count.y = (int) (W_H / dist);
-			tex_x = pl.pos.x + ray->side.y * ray->dir.x;
-			tex_x -= floor(tex_x);
+			hor_perp(ray, pl, &tex_x, &dist, &count);
 			if (tex_x > 1.0 - door->len)
 			{
 				tex_x = tex_x - 1 + door->len;
@@ -104,41 +99,18 @@ int	draw_doors(t_map map, t_ray *ray, double tex_x, SDL_Renderer *renderer, int 
 					return (GOING);
 				}
 				else
-				{
-					ray->side.y += sw_ds.x;
-					dist = ray->side.y * cos(ray->phase);
-					count.x = 0;
-					count.y = (int) (W_H / dist);
-					tex_x = pl.pos.y + ray->side.y * ray->dir.y;
-					tex_x -= floor(tex_x);
-					put_texture(renderer, count, x, tex_x, 10, map);
-					return (DONE);
-				}
+					return (draw_hor_ds(ray, map, renderer, tex_x, pl, x));
 			}
 		}
 		else
-		{
-			ray->side.y += sw_ds.x;
-			dist = ray->side.y * cos(ray->phase);
-			count.x = 0;
-			count.y = (int) (W_H / dist);
-			tex_x = pl.pos.y + ray->side.y * ray->dir.y;
-			tex_x -= floor(tex_x);
-			put_texture(renderer, count, x, tex_x, 10, map);
-			return (DONE);
-		}
+			return (draw_hor_ds(ray, map, renderer, tex_x, pl, x));
 	}
 	else if (map.map[ray->mp.y][ray->mp.x] == 10)
 	{
-		door = get_door(map, ray->mp.x, ray->mp.y);
-		sw_ds = sw_dr_ver(tex_x, *ray);
-		if (sw_ds.x < sw_ds.y) {
-			ray->side.x += sw_ds.x;
-			dist = ray->side.x * cos(ray->phase);
-			count.x = 0;
-			count.y = (int) (W_H / dist);
-			tex_x = pl.pos.y + ray->side.x * ray->dir.y;
-			tex_x -= floor(tex_x);
+		sw_ds = sw_ds_ver(tex_x, *ray);
+		if (sw_ds.x < sw_ds.y)
+		{
+			ver_perp(ray, pl, &tex_x, &dist, &count);
 			if (tex_x > 1.0 - door->len)
 			{
 				tex_x = tex_x - 1 + door->len;
@@ -147,7 +119,7 @@ int	draw_doors(t_map map, t_ray *ray, double tex_x, SDL_Renderer *renderer, int 
 			}
 			else
 			{
-				sw_ds = sw_dr_ver(tex_x, *ray);
+				sw_ds = sw_ds_ver(tex_x, *ray);
 				if (sw_ds.x < sw_ds.y)
 				{
 					ray->side.x += sw_ds.x;
@@ -157,30 +129,12 @@ int	draw_doors(t_map map, t_ray *ray, double tex_x, SDL_Renderer *renderer, int 
 					return (GOING);
 				}
 				else
-				{
-					ray->side.x += sw_ds.y;
-					dist = ray->side.x * cos(ray->phase);
-					count.x = 1;
-					count.y = (int) (W_H / dist);
-					tex_x = pl.pos.x + ray->side.x * ray->dir.x;
-					tex_x -= floor(tex_x);
-					put_texture(renderer, count, x, tex_x, 10, map);
-					return (DONE);
-				}
+					return (draw_vert_ds(ray, map, renderer, tex_x, pl, x));
 			}
 
 		}
 		else
-		{
-			ray->side.x += sw_ds.y;
-			dist = ray->side.x * cos(ray->phase);
-			count.x = 1;
-			count.y = (int) (W_H / dist);
-			tex_x = pl.pos.x + ray->side.x * ray->dir.x;
-			tex_x -= floor(tex_x);
-			put_texture(renderer, count, x, tex_x, 10, map);
-			return (DONE);
-		}
+			return (draw_vert_ds(ray, map, renderer, tex_x, pl, x));
 
 	}
 	return (DONE);
