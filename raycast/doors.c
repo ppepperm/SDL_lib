@@ -55,7 +55,7 @@ void	dist_texx_sq(double *tex_x, t_i2 *count, t_ray ray, t_player pl)
 
 	if (count->x == 0)
 	{
-		dist = ray.side.x * cos(ray.phase);
+		dist = ray.side.x * cos(ray.phase) ;
 		*tex_x = pl.pos.y + ray.side.x * ray.dir.y;
 		*tex_x -= floor(*tex_x);
 	}
