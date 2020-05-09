@@ -54,7 +54,8 @@ t_ray init_ray(t_player pl, t_map map,int x)
 	}
 	else
 	{
-		ray.side.y = (1 + (int)pl.pos.y - pl.pos.y) * ray.delta.y;
+		ray.side.y = (1 + (int)pl.pos.y - pl.pos.y)
+				* ray.delta.y;
 		ray.step.y = -1;
 	}
 	ray.hit = 0;
@@ -117,12 +118,45 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer)
 		{
 			dda(map1, &ray, &count);
 			dist_texx_sq(&tex_x, &count, ray, pl);
-			if (ray.hit < 9) {
+			if (map1.map[map1.size.y - 1 - (int)pl.pos.y][(int)pl.pos.x] == 10 ||\
+			map1.map[map1.size.y - 1 - (int)pl.pos.y][(int)pl.pos.x] == 9)
+			{
+				if ((abs(map1.size.y - 1 - (int)pl.pos.y - ray.mp.y) == 1 && abs((int)pl.pos.x - ray.mp.x) < 1) ||\
+				(abs((int)pl.pos.x - ray.mp.x) == 1 && abs(map1.size.y - 1 - (int)pl.pos.y - ray.mp.y) < 1))
+				{
+					put_texture(renderer, count, x, tex_x, 10, map1);
+					ray_status = DONE;
+					continue ;
+				}
+			}
+			if (ray.hit < 9)
+			{
 				put_texture(renderer, count, x, tex_x, map1.map[ray.mp.y][ray.mp.x], map1);
 				ray_status = DONE;
-			} else
+			}
+			else if (ray.hit == 9)
+			{
+				if (count.x == 0)
+				{
+					if (ray.dir.x > 0)
+						put_texture(renderer, count, x, tex_x, 1, map1);
+					else
+						put_texture(renderer, count, x, tex_x, 2, map1);
+				}
+				else
+				{
+
+					if (ray.dir.y > 0)
+						put_texture(renderer, count, x, tex_x, 3, map1);
+					else
+						put_texture(renderer, count, x, tex_x, 4, map1);
+				}
+				ray_status = DONE;
+				continue;
+			}
+			else
 				ray_status = draw_doors(map1, &ray, tex_x, renderer, x, pl);
-			//ft_putnbr(ray_status);
+
 		}
 		x++;
 	}

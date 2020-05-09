@@ -76,7 +76,7 @@ int	draw_doors(t_map map, t_ray *ray, double tex_x, SDL_Renderer *renderer, int 
 	double dist;
 
 	door = get_door(map, ray->mp.x, ray->mp.y);
-	if (map.map[ray->mp.y][ray->mp.x] == 9)
+	if (map.map[ray->mp.y][ray->mp.x] == 11)
 	{
 		sw_ds = sw_ds_hor(tex_x, *ray);
 		if (sw_ds.y < sw_ds.x) {
