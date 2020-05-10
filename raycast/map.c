@@ -18,7 +18,7 @@ void read_map(t_map *map,int fd)
 		while (count.x < map->size.x)
 		{
 			map->map[count.y][count.x] = ft_atoi(nums[count.x]);
-			if (map->map[count.y][count.x] == 9 || map->map[count.y][count.x] == 10)
+			if (map->map[count.y][count.x] == 10 || map->map[count.y][count.x] == 11)
 			{
 				if (map->doors_num == 0)
 				{
