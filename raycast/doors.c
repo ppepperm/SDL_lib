@@ -30,7 +30,7 @@ int				check_for_door(t_data data, int x, int y)
 	t_door	*door;
 
 	door = get_door(data, x, y);
-	if (data.map[y][x] < 9)
+	if (data.map[y][x] <= 9)
 		return (0);
 	if (door->status == OPENED && door)
 		return (1);

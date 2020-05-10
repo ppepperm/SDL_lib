@@ -48,8 +48,8 @@ static int	reading_line(t_data *data, char **nums, t_i2 count)
 		{
 			return (0);
 		}
-		if (data->map[count.y][count.x] == 9
-			|| data->map[count.y][count.x] == 10)
+		if (data->map[count.y][count.x] == 10
+			|| data->map[count.y][count.x] == 11)
 		{
 			init_doors(data, count);
 		}
