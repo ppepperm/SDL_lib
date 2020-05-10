@@ -11,7 +11,9 @@
 # **************************************************************************** #
 
 NAME= raycast
-SRC := complex.c raycast.c colour.c player.c map.c put_texture.c double.c
+SRC :=	complex.c raycast.c main.c map.c doors.c\
+		double.c events.c data.c textures.c checks.c errors.c\
+		freeing.c put.c doors_horizontal.c doors_vertical.c
 OBJ := $(patsubst %.c, %.o, $(SRC))
 CFLAGS := -Wall -Wextra -Werror -I includes
 LIB_FLAG :=  -L libft/ -lft `sdl2-config --libs --cflags` -O0 -framework OpenCl
