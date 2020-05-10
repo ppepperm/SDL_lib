@@ -119,7 +119,7 @@ void raycast(t_map map1, t_player pl, SDL_Renderer *renderer)
 			dda(map1, &ray, &count);
 			dist_texx_sq(&tex_x, &count, ray, pl);
 			if (map1.map[map1.size.y - 1 - (int)pl.pos.y][(int)pl.pos.x] == 10 ||\
-			map1.map[map1.size.y - 1 - (int)pl.pos.y][(int)pl.pos.x] == 9)
+			map1.map[map1.size.y - 1 - (int)pl.pos.y][(int)pl.pos.x] == 11)
 			{
 				if ((abs(map1.size.y - 1 - (int)pl.pos.y - ray.mp.y) == 1 && abs((int)pl.pos.x - ray.mp.x) < 1) ||\
 				(abs((int)pl.pos.x - ray.mp.x) == 1 && abs(map1.size.y - 1 - (int)pl.pos.y - ray.mp.y) < 1))
