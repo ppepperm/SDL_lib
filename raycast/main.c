@@ -19,7 +19,7 @@ static void	sdl_end(t_data data)
 	SDL_Quit();
 }
 
-int			main()
+int			main(void)
 {
 	t_player	player;
 	t_data		data;
@@ -44,5 +44,5 @@ int			main()
 		SDL_RenderPresent(data.renderer);
 	}
 	sdl_end(data);
-	return EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }

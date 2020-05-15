@@ -36,12 +36,13 @@ static void		ray_direction(t_ray *ray, t_player player)
 	}
 }
 
-static t_ray	init_ray(t_player player, t_data map,int x)
+static t_ray	init_ray(t_player player, t_data map, int x)
 {
 	t_ray	ray;
 
 	ray.phase = -FOV * (x / W_W - 0.5) * 0.0174533;
-	ray.dir = comp_multiply(player.dir, init_p2(cos(ray.phase), sin(ray.phase)));
+	ray.dir = comp_multiply(player.dir,
+			init_p2(cos(ray.phase), sin(ray.phase)));
 	ray.map.x = (int)player.pos.x;
 	ray.map.y = map.size.y - 1 - (int)player.pos.y;
 	if (ray.dir.x == 0)
@@ -77,7 +78,8 @@ static void		dda(t_data *data, t_ray *ray)
 	ray->side = comp_dif(ray->side, ray->delta);
 }
 
-static void		calculation_height(t_parametrs *param, t_ray ray, t_player player)
+static void		calculation_height(t_parametrs *param,
+		t_ray ray, t_player player)
 {
 	double	dist;
 

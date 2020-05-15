@@ -32,8 +32,8 @@ static t_p2	dist_small_door_vertical(double texture_x, t_ray ray)
 static int	draw_vertical_door_side(t_ray *ray, t_data data,
 									SDL_Renderer *renderer, t_player player)
 {
-	data.param.dist_small_door
-		= dist_small_door_vertical(data.param.texture_x, *ray);
+	data.param.dist_small_door =
+			dist_small_door_vertical(data.param.texture_x, *ray);
 	ray->side.x += data.param.dist_small_door.y;
 	data.param.dist = ray->side.x * cos(ray->phase);
 	data.param.side = 1;
@@ -67,8 +67,8 @@ static int	name_vertical(t_data data, t_ray *ray, SDL_Renderer *renderer,
 	}
 	else
 	{
-		data.param.dist_small_door
-			= dist_small_door_vertical(data.param.texture_x, *ray);
+		data.param.dist_small_door =
+				dist_small_door_vertical(data.param.texture_x, *ray);
 		if (data.param.dist_small_door.x < data.param.dist_small_door.y)
 		{
 			ray->side.x += data.param.dist_small_door.x;
@@ -85,8 +85,8 @@ static int	name_vertical(t_data data, t_ray *ray, SDL_Renderer *renderer,
 int			processing_door_vertical(t_data data, t_ray *ray,
 								SDL_Renderer *renderer, t_player player)
 {
-	data.param.dist_small_door
-		= dist_small_door_vertical(data.param.texture_x, *ray);
+	data.param.dist_small_door =
+			dist_small_door_vertical(data.param.texture_x, *ray);
 	if (data.param.dist_small_door.x < data.param.dist_small_door.y)
 	{
 		vertical_preparations(ray, player, &data.param);

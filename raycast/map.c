@@ -63,7 +63,7 @@ static int	reading_line(t_data *data, char **nums, t_i2 count)
 	return (1);
 }
 
-int			init_map(t_data *data,int fd)
+int			init_map(t_data *data, int fd)
 {
 	char	*line;
 	char	**nums;
@@ -72,7 +72,7 @@ int			init_map(t_data *data,int fd)
 	data->map = (int**)malloc(sizeof(int*) * data->size.y);
 	count.y = 0;
 	data->doors_num = 0;
-	while(get_next_line(fd, &line))
+	while (get_next_line(fd, &line))
 	{
 		data->map[count.y] = (int*)malloc(sizeof(int) * data->size.x);
 		if (count.y >= data->size.y)

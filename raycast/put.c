@@ -77,7 +77,7 @@ static int	check_texture_door(t_data *data, SDL_Renderer *renderer, t_ray *ray,
 {
 	if (data->map[data->size.y - 1 - (int)player.pos.y][(int)player.pos.x] == 10
 		|| data->map[data->size.y - 1 - (int)player.pos.y]
-		[(int)player.pos.x] == 9)
+		[(int)player.pos.x] == 11)
 	{
 		if ((abs(data->size.y - 1 - (int)player.pos.y - ray->map.y) == 1
 			&& abs((int)player.pos.x - ray->map.x) < 1)

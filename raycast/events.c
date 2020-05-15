@@ -32,9 +32,7 @@ int		event_keydown(t_data *data, t_player *player, SDL_Event event)
 		if (event.key.keysym.scancode == SDL_SCANCODE_D)
 			player->rot = -1;
 		if (event.key.keysym.scancode == SDL_SCANCODE_SPACE)
-		{
 			door_handling(data, player);
-		}
 	}
 	return (1);
 }
@@ -61,7 +59,7 @@ void	event_move(t_data *data, t_player *player)
 		if (data->map[data->size.y - 1 - (int)player->pos.y]
 			[(int)(player->pos.x + player->dir.x * 0.4 * player->mov.x
 			+ player->mov.x * player->dir.x * SPD)] == 0
-			|| check_for_door(*data,(int)(player->pos.x + player->dir.x * 0.4
+			|| check_for_door(*data, (int)(player->pos.x + player->dir.x * 0.4
 			* player->mov.x + player->mov.x * player->dir.x * SPD),
 			data->size.y - 1 - (int)player->pos.y) == 1)
 		{

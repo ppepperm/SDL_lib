@@ -52,7 +52,6 @@ void		init_textures_dark(t_data *data, SDL_Renderer *renderer)
 	load_image("textures_dark/wood.png", 7, data->textures_dark, renderer);
 	load_image("textures_dark/door1.1.png", 8, data->textures_dark, renderer);
 	load_image("textures_dark/door1.2.png", 9, data->textures_dark, renderer);
-
 }
 
 void		init_skybox(t_data *data, SDL_Renderer *renderer)

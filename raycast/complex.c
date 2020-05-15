@@ -15,6 +15,7 @@
 t_p2	init_p2(double x, double y)
 {
 	t_p2	complex;
+
 	complex.x = x;
 	complex.y = y;
 	return (complex);
