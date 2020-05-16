@@ -19,7 +19,7 @@ static void	sdl_end(t_data data)
 	SDL_Quit();
 }
 
-int			main(void)
+int			main(int argc, char** argv)
 {
 	t_player	player;
 	t_data		data;
@@ -27,7 +27,9 @@ int			main(void)
 
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-	if (!init_data("level.map", &data))
+	if (argc != 2)
+		return (0);
+	if (!init_data(argv[1], &data))
 		return (0);
 	player = init_player(init_p2(data.start.x, data.start.y),
 		init_p2(sqrt(0.5), sqrt(0.5)));

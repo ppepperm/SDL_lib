@@ -33,6 +33,8 @@ int		event_keydown(t_data *data, t_player *player, SDL_Event event)
 			player->rot = -1;
 		if (event.key.keysym.scancode == SDL_SCANCODE_SPACE)
 			door_handling(data, player);
+		if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+			return (0);
 	}
 	return (1);
 }
