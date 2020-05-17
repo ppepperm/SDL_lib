@@ -10,11 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME= raycast
+NAME= Wolf3D
 SRC :=	complex.c raycast.c main.c map.c doors.c\
 		double.c events.c data.c textures.c checks.c errors.c\
 		freeing.c put.c doors_horizontal.c doors_vertical.c
-OBJ := $(patsubst %.c, %.o, $(SRC))
+OBJ := $(SRC:%.c=%.o)
 CFLAGS := -Wall -Wextra -Werror -I includes
 LIB_FLAG :=  -L libft/ -lft `sdl2-config --libs --cflags` -O0 -framework OpenCl
 LINUX_FLAG := -L libft/ -lft `sdl2-config --libs --cflags` -O0 -lSDL2_image -lm
@@ -23,8 +23,8 @@ INCLUDES := .
 all: $(NAME)
 
 %.o : src/%.c $(INCLUDES)
-		@gcc -c $(CFLAGS) -I $(INCLUDES) $< -o $@
-		@echo $(patsubst src/%.c, %, $<)
+		gcc -c $(CFLAGS) -I $(INCLUDES) $SSRC -o
+		@echo $(SSRC:src/%.c = %)
 
 $(NAME): $(OBJ)
 		@make -C libft

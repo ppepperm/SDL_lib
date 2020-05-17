@@ -20,8 +20,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-# define W_H		600.0
-# define W_W		800.0
+# define W_H		720.0
+# define W_W		1080.0
 # define FOV		65.0
 # define SPD		0.1
 # define W			0.04

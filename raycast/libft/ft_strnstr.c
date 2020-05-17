@@ -15,10 +15,7 @@
 char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
 	size_t	lenn;
-	char	crash;
 
-	crash = *str;
-	crash = crash + 1;
 	lenn = ft_strlen(to_find);
 	while (len >= lenn && *str)
 	{

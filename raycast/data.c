@@ -55,6 +55,11 @@ int			init_data(char *fname, t_data *data)
 	int	fd;
 
 	fd = open(fname, O_RDWR);
+	if (fd < 0)
+	{
+		ft_putstr("Wrong file name\n");
+		return (0);
+	}
 	if (!init_coordinates(&(data->size), fd)
 		|| !init_coordinates(&(data->start), fd) || !init_map(data, fd))
 	{
