@@ -16,7 +16,7 @@ SRC :=	complex.c raycast.c main.c map.c doors.c\
 		freeing.c put.c doors_horizontal.c doors_vertical.c
 OBJ := $(SRC:%.c=%.o)
 CFLAGS := -Wall -Wextra -Werror -I includes
-LIB_FLAG :=  -L libft/ -lft `sdl2-config --libs --cflags` -O0 -framework OpenCl
+LIB_FLAG :=  -L libft/ -lft `sdl2-config --libs --cflags` -O0  -lSDL2_image
 LINUX_FLAG := -L libft/ -lft `sdl2-config --libs --cflags` -O0 -lSDL2_image -lm
 INCLUDES := .
 
