@@ -13,8 +13,7 @@
 #ifndef RAYCAST_H
 # define RAYCAST_H
 
-# include <./SDL2/SDL.h>
-# include <SDL2/SDL_image.h>
+# include "SDL2/SDL.h"
 # include <math.h>
 # include "libft/includes/libft.h"
 # include <fcntl.h>
