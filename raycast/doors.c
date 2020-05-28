@@ -45,7 +45,10 @@ void			door_handling(t_data *data, t_player *player)
 	spd = SPD + 1;
 	if (data->map
 		[data->size.y - 1 - (int)(player->pos.y + spd * player->dir.y)]
-		[(int)(player->pos.x + player->dir.x * spd)] >= 10)
+		[(int)(player->pos.x + player->dir.x * spd)] == 10
+		|| data->map
+		[data->size.y - 1 - (int)(player->pos.y + spd * player->dir.y)]
+		[(int)(player->pos.x + player->dir.x * spd)] == 11)
 	{
 		door = get_door(*data, (int)(player->pos.x + player->dir.x * spd),
 			data->size.y - 1 - (int)(player->pos.y + spd * player->dir.y));
