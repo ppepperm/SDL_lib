@@ -14,7 +14,7 @@
 
 static int	check_value(t_data *data, t_i2 count)
 {
-	if (data->map[count.y][count.x] < 0 || data->map[count.y][count.x] > 11)
+	if (data->map[count.y][count.x] < 0 || data->map[count.y][count.x] > 12)
 	{
 		return (error_map(data, count.y, "Invalid cell value\n"));
 	}

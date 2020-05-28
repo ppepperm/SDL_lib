@@ -26,9 +26,9 @@ void		put_texture(SDL_Renderer *renderer, int type, t_data data)
 	src.h = 64;
 	src.w = 1;
 	if (data.param.side == 0)
-		SDL_RenderCopy(renderer, data.textures[type - 1], &src, &dst);
+		SDL_RenderCopy(renderer, data.textures[type % 11 - 1], &src, &dst);
 	else if (data.param.side == 1)
-		SDL_RenderCopy(renderer, data.textures_dark[type - 1], &src, &dst);
+		SDL_RenderCopy(renderer, data.textures_dark[type % 11 - 1], &src, &dst);
 }
 
 void		put_skybox(SDL_Renderer *renderer, t_data data, t_player player)
@@ -97,7 +97,7 @@ int			texture_selection(t_data *data, SDL_Renderer *renderer, t_ray *ray,
 {
 	if (check_texture_door(data, renderer, ray, player))
 		return (1);
-	if (ray->hit < 9)
+	if (ray->hit < 9 || ray->hit == 12)
 	{
 		put_texture(renderer,
 			data->map[ray->map.y][ray->map.x], *data);

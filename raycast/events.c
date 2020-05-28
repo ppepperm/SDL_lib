@@ -56,26 +56,26 @@ void	event_keyup(t_player *player, SDL_Event event)
 
 void	event_move(t_data *data, t_player *player)
 {
+	int	temp;
+
 	if (player->mov.x != 0)
 	{
-		if (data->map[data->size.y - 1 - (int)player->pos.y]
+		temp = data->map[data->size.y - 1 - (int)player->pos.y]
 			[(int)(player->pos.x + player->dir.x * 0.4 * player->mov.x
-			+ player->mov.x * player->dir.x * SPD)] == 0
-			|| check_for_door(*data, (int)(player->pos.x + player->dir.x * 0.4
-			* player->mov.x + player->mov.x * player->dir.x * SPD),
-			data->size.y - 1 - (int)player->pos.y) == 1)
-		{
+			+ player->mov.x * player->dir.x * SPD)];
+		if (temp == 0 || temp == 12
+				|| check_for_door(*data, (int)(player->pos.x + player->dir.x
+				* 0.4 * player->mov.x + player->mov.x * player->dir.x * SPD),
+				data->size.y - 1 - (int)player->pos.y) == 1)
 			player->pos.x += player->mov.x * player->dir.x * SPD;
-		}
-		if (data->map[data->size.y - 1 - (int)(player->pos.y + player->dir.y
+		temp = data->map[data->size.y - 1 - (int)(player->pos.y + player->dir.y
 			* 0.4 * player->mov.x + SPD * player->dir.y * player->mov.x)]
-			[(int)player->pos.x] == 0
-			|| check_for_door(*data, (int)player->pos.x, data->size.y - 1
-			- (int)(player->pos.y + player->dir.y * 0.4 * player->mov.x
-			+ SPD * player->dir.y * player->mov.x)) == 1)
-		{
+			[(int)player->pos.x];
+		if (temp == 0 || temp == 12
+				|| check_for_door(*data, (int)player->pos.x, data->size.y - 1
+				- (int)(player->pos.y + player->dir.y * 0.4 * player->mov.x
+				+ SPD * player->dir.y * player->mov.x)) == 1)
 			player->pos.y += player->mov.x * player->dir.y * SPD;
-		}
 	}
 	if (player->rot != 0)
 		player->dir = comp_multiply(player->dir,
