@@ -30,7 +30,7 @@ int				check_for_door(t_data data, int x, int y)
 	t_door	*door;
 
 	door = get_door(data, x, y);
-	if (data.map[y][x] <= 9)
+	if (data.map[y][x] <= 9 || data.map[y][x] >= 12)
 		return (0);
 	if (door->status == OPENED && door)
 		return (1);
@@ -57,6 +57,12 @@ void			door_handling(t_data *data, t_player *player)
 		else if (door->status == CLOSED)
 			door->status = OPENING;
 	}
+	else if (data->map
+			[data->size.y - 1 - (int)(player->pos.y + spd * player->dir.y)]
+			[(int)(player->pos.x + player->dir.x * spd)] == 12)
+		data->map
+		[data->size.y - 1 - (int)(player->pos.y + spd * player->dir.y)]
+		[(int)(player->pos.x + player->dir.x * spd)] = 0;
 }
 
 void			doors_funk(t_door *doors)
