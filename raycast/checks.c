@@ -23,7 +23,8 @@ static int	check_value(t_data *data, t_i2 count)
 
 static int	check_border(t_data *data, t_i2 count)
 {
-	if (data->map[count.y][count.x] == 0)
+	if (data->map[count.y][count.x] == 0 ||
+	data->map[count.y][count.x] >= 10)
 	{
 		return (error_map(data, count.y, "No wall on the border\n"));
 	}
