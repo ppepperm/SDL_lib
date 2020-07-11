@@ -30,7 +30,7 @@ static int	load_image(const char *path, int i, SDL_Texture **texture,
 	return (1);
 }
 
-int		init_textures(t_data *data, SDL_Renderer *renderer)
+int			init_textures(t_data *data, SDL_Renderer *renderer)
 {
 	if (!(data->textures = (SDL_Texture**)malloc(sizeof(SDL_Texture*) * 10))
 		|| !load_image("textures/bluestone.bmp", 0, data->textures, renderer)
@@ -49,9 +49,10 @@ int		init_textures(t_data *data, SDL_Renderer *renderer)
 	return (1);
 }
 
-int		init_textures_dark(t_data *data, SDL_Renderer *renderer)
+int			init_textures_dark(t_data *data, SDL_Renderer *renderer)
 {
-	if (!(data->textures_dark = (SDL_Texture**)malloc(sizeof(SDL_Texture*) * 10))
+	if (!(data->textures_dark =\
+		(SDL_Texture**)malloc(sizeof(SDL_Texture*) * 10))
 		|| !load_image("textures_dark/bluestone.bmp", 0, data->textures_dark,
 		renderer)
 		|| !load_image("textures_dark/colorstone.bmp", 1,
@@ -72,13 +73,11 @@ int		init_textures_dark(t_data *data, SDL_Renderer *renderer)
 		renderer)
 		|| !load_image("textures_dark/door1.2.bmp", 9, data->textures_dark,
 		renderer))
-	{
 		return (0);
-	}
 	return (1);
 }
 
-int		init_skybox(t_data *data, SDL_Renderer *renderer)
+int			init_skybox(t_data *data, SDL_Renderer *renderer)
 {
 	SDL_Surface	*surface;
 

@@ -76,7 +76,7 @@ int			init_map(t_data *data, int fd)
 	data->doors_num = 0;
 	while (get_next_line(fd, &line))
 	{
-		if (!(data->map[++(count.y)] = (int*)malloc(sizeof(int) * data->size.x)))
+		if (!(data->map[++(count.y)] = (int*)malloc(4 * data->size.x)))
 			return (free_line(line) + error_map(data, count.y, "FTAM\n"));
 		if (count.y >= data->size.y)
 			return (free_line(line) + error_map(data, count.y, "Inc height\n"));

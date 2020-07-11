@@ -12,7 +12,7 @@
 
 #include "raycast.h"
 
-int		init_doors(t_data *data, t_i2 count)
+int			init_doors(t_data *data, t_i2 count)
 {
 	t_door	*door_new;
 

@@ -12,7 +12,7 @@
 
 #include "raycast.h"
 
-int		put_texture(SDL_Renderer *renderer, int type, t_data data)
+int			put_texture(SDL_Renderer *renderer, int type, t_data data)
 {
 	SDL_Rect	dst;
 	SDL_Rect	src;
@@ -38,7 +38,7 @@ int		put_texture(SDL_Renderer *renderer, int type, t_data data)
 	return (1);
 }
 
-int		put_skybox(SDL_Renderer *renderer, t_data data, t_player player)
+int			put_skybox(SDL_Renderer *renderer, t_data data, t_player player)
 {
 	SDL_Rect	dst;
 	SDL_Rect	src;
@@ -72,9 +72,8 @@ static int	processing_all_sides(t_data *data, SDL_Renderer *renderer,
 			if (!put_texture(renderer, 1, *data))
 				return (0);
 		}
-		else
-			if (!put_texture(renderer, 2, *data))
-				return (0);
+		else if (!put_texture(renderer, 2, *data))
+			return (0);
 	}
 	else
 	{
@@ -83,9 +82,8 @@ static int	processing_all_sides(t_data *data, SDL_Renderer *renderer,
 			if (!put_texture(renderer, 3, *data))
 				return (0);
 		}
-		else
-			if (!put_texture(renderer, 4, *data))
-				return (0);
+		else if (!put_texture(renderer, 4, *data))
+			return (0);
 	}
 	return (1);
 }
@@ -131,9 +129,8 @@ int			texture_selection(t_data *data, SDL_Renderer *renderer, t_ray *ray,
 		data->param.ray_status = DONE;
 		return (1);
 	}
-	else
-		if ((data->param.ray_status
-			= draw_doors(*data, ray, renderer, player)) < 0)
-			return (-1);
+	else if ((data->param.ray_status =\
+	draw_doors(*data, ray, renderer, player)) < 0)
+		return (-1);
 	return (0);
 }

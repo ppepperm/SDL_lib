@@ -98,7 +98,7 @@ static void		calculation_height(t_parametrs *param,
 	param->line_height = (int)(W_H / dist);
 }
 
-int			raycast(t_data data, t_player player, SDL_Renderer *renderer)
+int				raycast(t_data data, t_player player, SDL_Renderer *renderer)
 {
 	t_ray	ray;
 
