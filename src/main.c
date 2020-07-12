@@ -31,10 +31,13 @@ static void	sdl_end(t_data data)
 			SDL_DestroyTexture(data.textures_dark[i++]);
 		free(data.textures_dark);
 	}
-	SDL_DestroyTexture(data.skybox);
+	if (data.skybox)
+		SDL_DestroyTexture(data.skybox);
 	free_map(&data, data.size.y - 1);
-	SDL_DestroyRenderer(data.renderer);
-	SDL_DestroyWindow(data.window);
+	if (data.renderer)
+		SDL_DestroyRenderer(data.renderer);
+	if (data.window)
+		SDL_DestroyWindow(data.window);
 	SDL_Quit();
 }
 

@@ -24,13 +24,16 @@ void	free_doors(t_door *doors)
 {
 	t_door	*del;
 
+	if (!doors)
+		return ;
 	while (doors->next)
 	{
 		del = doors;
 		doors = doors->next;
 		free(del);
 	}
-	free(doors);
+	if (doors)
+		free(doors);
 }
 
 int		free_nums(char **nums, int i)
@@ -52,10 +55,15 @@ int		free_line(char *line)
 
 void	free_map(t_data *data, int y)
 {
+	if (!data->map)
+		return ;
 	while (y >= 0)
 	{
-		free(data->map[y]);
+		if (data->map[y])
+			free(data->map[y]);
 		y--;
 	}
-	free(data->map);
+	if (data->map)
+		free(data->map);
+	data->map = NULL;
 }

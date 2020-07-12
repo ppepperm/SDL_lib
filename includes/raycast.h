@@ -113,7 +113,7 @@ t_p2				comp_dif(t_p2 z1, t_p2 z2);
 t_p2				comp_multiply(t_p2 z1, t_p2 z2);
 double				d_abs(double num);
 double				comp_dot(t_p2 z1, t_p2 z2);
-int				raycast(t_data data, t_player player,
+int					raycast(t_data data, t_player player,
 					SDL_Renderer *renderer);
 void				doors_funk(t_door *doors);
 int					draw_doors(t_data data, t_ray *ray, SDL_Renderer *renderer,
