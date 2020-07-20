@@ -14,10 +14,16 @@
 
 void	free_coordinates(char **nums, char *line)
 {
-	free(nums[0]);
-	free(nums[1]);
-	free(line);
-	free(nums);
+	if (nums)
+	{
+		if (nums[0])
+			free(nums[0]);
+		if (nums[1])
+			free(nums[1]);
+		free(nums);
+	}
+	if (line)
+		free(line);
 }
 
 void	free_doors(t_door *doors)
@@ -38,32 +44,40 @@ void	free_doors(t_door *doors)
 
 int		free_nums(char **nums, int i)
 {
-	while (nums[i])
+	if (nums)
 	{
-		free(nums[i]);
-		i++;
+		while (nums[i])
+		{
+			if (nums[i])
+				free(nums[i]);
+			i++;
+		}
+		free(nums);
 	}
-	free(nums);
 	return (0);
 }
 
 int		free_line(char *line)
 {
-	free(line);
+	if (line)
+		free(line);
+
 	return (0);
 }
 
 void	free_map(t_data *data, int y)
 {
-	if (!data->map)
-		return ;
-	while (y >= 0)
+	if (data->map != NULL)
 	{
-		if (data->map[y])
-			free(data->map[y]);
-		y--;
+		while (y >= 0) {
+			if (data->map[y])
+			{
+				free(data->map[y]);
+			}
+			y--;
+		}
+		if (data->map)
+			free(data->map);
+		data->map = NULL;
 	}
-	if (data->map)
-		free(data->map);
-	data->map = NULL;
 }

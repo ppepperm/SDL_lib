@@ -17,6 +17,7 @@ int			init_coordinates(t_i2 *complex, int fd)
 	char	**nums;
 	char	*line;
 
+	line = NULL;
 	get_next_line(fd, &line);
 	if (!(nums = ft_strsplit(line, ' ')))
 	{
@@ -57,9 +58,7 @@ static int	reading_line(t_data *data, char **nums, t_i2 *count)
 	}
 	free(nums);
 	if (count->x != data->size.x)
-	{
-		return (error_map(data, count->y, "Incorrect width\n"));
-	}
+		return (error_map(data, count->y, "Incorrect width1\n"));
 	return (1);
 }
 
@@ -72,6 +71,7 @@ int			init_map(t_data *data, int fd)
 	if (!(data->map = (int**)malloc(sizeof(int*) * data->size.y)))
 		return (0);
 	count.y = -1;
+	line = NULL;
 	data->doors = NULL;
 	data->doors_num = 0;
 	while (get_next_line(fd, &line))
@@ -88,6 +88,6 @@ int			init_map(t_data *data, int fd)
 		free(line);
 	}
 	if (count.y + 1 != data->size.y)
-		return (error_map(data, count.y, "Incorrect height\n"));
+		return (error_map(data, count.y, "Inc height\n"));
 	return (1);
 }
