@@ -38,9 +38,7 @@ static void	sdl_end(t_data data)
 		SDL_DestroyRenderer(data.renderer);
 	if (data.window)
 		SDL_DestroyWindow(data.window);
-	//ft_putstr("1\n");
 	SDL_Quit();
-	//ft_putstr("2\n");
 }
 
 static void	reset_data(t_data *data)
@@ -52,13 +50,17 @@ static void	reset_data(t_data *data)
 	data->window = NULL;
 	data->renderer = NULL;
 	data->doors = NULL;
+	data->doors_num = 0;
 }
 
 static int	check_input(t_data *data, char **argv, int argc)
 {
 	reset_data(data);
 	if (argc != 2)
+	{
+		ft_putstr("Invalid arguments");
 		return (0);
+	}
 	else if (!init_data(argv[1], data) || SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		sdl_end(*data);

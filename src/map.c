@@ -17,10 +17,11 @@ int			init_coordinates(t_i2 *complex, int fd)
 	char	**nums;
 	char	*line;
 
-	line = NULL;
 	get_next_line(fd, &line);
-	if (!(nums = ft_strsplit(line, ' ')))
+	if (!(nums = ft_strsplit(line, ' ')) || !nums[0])
 	{
+		ft_putstr("Incorrect coordinates\n");
+		free(nums);
 		free(line);
 		return (0);
 	}
@@ -43,22 +44,20 @@ static int	reading_line(t_data *data, char **nums, t_i2 *count)
 	while (nums[count->x])
 	{
 		if (count->x >= data->size.x)
-			return (error_map(data, count->y, "Incorrect width\n"));
+			return (error_map(data, count->y, "Incorrect width\n") + free_nums(nums, count->x));
 		data->map[count->y][count->x] = ft_atoi(nums[count->x]);
-		if (!check_cell(data, *count))
-			return (0);
+		if ((data->map[count->y][count->x] == 0 && ft_strcmp(nums[count->x], "0") != 0) ///////////////////
+			|| !check_cell(data, *count))
+			return (free_nums(nums, count->x));
 		if (data->map[count->y][count->x] == 10
 			|| data->map[count->y][count->x] == 11)
 			if (!(init_doors(data, *count)))
-			{
-				free_doors(data->doors);
-				return (error_map(data, count->y, "FTAM\n"));
-			}
+				return (error_map(data, count->y, "FTAM\n") + free_nums(nums, count->x));
 		free(nums[count->x++]);
 	}
 	free(nums);
 	if (count->x != data->size.x)
-		return (error_map(data, count->y, "Incorrect width1\n"));
+		return (error_map(data, count->y, "Incorrect width\n"));
 	return (1);
 }
 
@@ -71,9 +70,6 @@ int			init_map(t_data *data, int fd)
 	if (!(data->map = (int**)malloc(sizeof(int*) * data->size.y)))
 		return (0);
 	count.y = -1;
-	line = NULL;
-	data->doors = NULL;
-	data->doors_num = 0;
 	while (get_next_line(fd, &line))
 	{
 		if (!(data->map[++(count.y)] = (int*)malloc(4 * data->size.x)))
@@ -84,7 +80,7 @@ int			init_map(t_data *data, int fd)
 			return (free_line(line) + error_map(data, count.y, "FTAM\n"));
 		count.x = 0;
 		if (!reading_line(data, nums, &count))
-			return (free_line(line) + free_nums(nums, count.x));
+			return (free_line(line));
 		free(line);
 	}
 	if (count.y + 1 != data->size.y)

@@ -33,8 +33,8 @@ static int	check_border(t_data *data, t_i2 count)
 
 static int	check_player(t_data *data, t_i2 count)
 {
-	if (data->start.x <= 0 || data->start.x >= data->size.x
-		|| data->start.y <= 0 || data->start.y >= data->size.y)
+	if (data->start.x < 0 || data->start.x >= data->size.x
+		|| data->start.y < 0 || data->start.y >= data->size.y)
 	{
 		return (error_map(data, count.y, "Player out of bounds\n"));
 	}

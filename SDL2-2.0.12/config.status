@@ -437,8 +437,8 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/lyahasik/tst/SDL2-2.0.12'
-srcdir='/home/lyahasik/tst/SDL2-2.0.12'
+ac_pwd='/home/lyahasik/debug/SDL2-2.0.12'
+srcdir='/home/lyahasik/debug/SDL2-2.0.12'
 INSTALL='/usr/bin/install -c'
 AWK='mawk'
 test -n "$AWK" || AWK=awk
@@ -598,7 +598,7 @@ old_postuninstall_cmds=''
 old_archive_cmds='$AR $AR_FLAGS $oldlib$oldobjs~$RANLIB $tool_oldlib'
 lock_old_archive_extraction='no'
 CC='gcc'
-CFLAGS='-g -O2 -Iinclude -I/home/lyahasik/tst/SDL2-2.0.12/include -idirafter /home/lyahasik/tst/SDL2-2.0.12/src/video/khronos  '
+CFLAGS='-g -O2 -Iinclude -I/home/lyahasik/debug/SDL2-2.0.12/include -idirafter /home/lyahasik/debug/SDL2-2.0.12/src/video/khronos  '
 compiler='g++'
 GCC='yes'
 lt_cv_sys_global_symbol_pipe='sed -n -e '\''s/^.*[	 ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[	 ][	 ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p'\'' | sed '\''/ __gnu_lto/d'\'''
@@ -879,9 +879,9 @@ S["LTLIBOBJS"]=""
 S["WAYLAND_SCANNER"]=""
 S["EXTRA_LDFLAGS"]=" -Wl,--no-undefined -lm -ldl -lpthread -lrt"
 S["BUILD_LDFLAGS"]=""
-S["EXTRA_CFLAGS"]="-Iinclude -I/home/lyahasik/tst/SDL2-2.0.12/include -idirafter /home/lyahasik/tst/SDL2-2.0.12/src/video/khronos  -mmmx -m3dnow -msse -msse2 -msse3 -W"\
-"all -fno-strict-aliasing -fvisibility=hidden -Wdeclaration-after-statement -Werror=declaration-after-statement  -D_REENTRANT   -I/usr/include/dbus-1"\
-".0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -D_REENTRANT -DHAVE_LINUX_VERSION_H"
+S["EXTRA_CFLAGS"]="-Iinclude -I/home/lyahasik/debug/SDL2-2.0.12/include -idirafter /home/lyahasik/debug/SDL2-2.0.12/src/video/khronos  -mmmx -m3dnow -msse -msse2 -msse"\
+"3 -Wall -fno-strict-aliasing -fvisibility=hidden -Wdeclaration-after-statement -Werror=declaration-after-statement  -D_REENTRANT   -I/usr/include/db"\
+"us-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -D_REENTRANT -DHAVE_LINUX_VERSION_H"
 S["BUILD_CFLAGS"]="-g -O3 -DUSING_GENERATED_CONFIG_H"
 S["SDLTEST_OBJECTS"]="$(objects)/SDL_test_assert.lo $(objects)/SDL_test_common.lo $(objects)/SDL_test_compare.lo $(objects)/SDL_test_crc32.lo $(objects)/SDL_test_font.lo "\
 "$(objects)/SDL_test_fuzzer.lo $(objects)/SDL_test_harness.lo $(objects)/SDL_test_imageBlit.lo $(objects)/SDL_test_imageBlitBlend.lo $(objects)/SDL_t"\
@@ -918,7 +918,7 @@ S["OBJECTS"]="$(objects)/SDL.lo $(objects)/SDL_assert.lo $(objects)/SDL_dataqueu
 "scond.lo $(objects)/SDL_systls.lo $(objects)/SDL_sysjoystick.lo $(objects)/SDL_steamcontroller.lo $(objects)/SDL_syshaptic.lo $(objects)/SDL_syspowe"\
 "r.lo $(objects)/SDL_sysfilesystem.lo $(objects)/SDL_systimer.lo $(objects)/SDL_udev.lo $(objects)/SDL_evdev.lo $(objects)/SDL_evdev_kbd.lo $(objects"\
 ")/SDL_threadprio.lo $(objects)/SDL_poll.lo $(objects)/SDL_dummysensor.lo"
-S["INCLUDE"]="-Iinclude -I/home/lyahasik/tst/SDL2-2.0.12/include -idirafter /home/lyahasik/tst/SDL2-2.0.12/src/video/khronos"
+S["INCLUDE"]="-Iinclude -I/home/lyahasik/debug/SDL2-2.0.12/include -idirafter /home/lyahasik/debug/SDL2-2.0.12/src/video/khronos"
 S["ac_aux_dir"]="build-scripts"
 S["ENABLE_STATIC_FALSE"]="#"
 S["ENABLE_STATIC_TRUE"]=""
@@ -1005,9 +1005,9 @@ S["SED"]="/bin/sed"
 S["OBJEXT"]="o"
 S["EXEEXT"]=""
 S["ac_ct_CC"]="gcc"
-S["CPPFLAGS"]=" -Iinclude -I/home/lyahasik/tst/SDL2-2.0.12/include -idirafter /home/lyahasik/tst/SDL2-2.0.12/src/video/khronos "
+S["CPPFLAGS"]=" -Iinclude -I/home/lyahasik/debug/SDL2-2.0.12/include -idirafter /home/lyahasik/debug/SDL2-2.0.12/src/video/khronos "
 S["LDFLAGS"]=" "
-S["CFLAGS"]="-g -O2 -Iinclude -I/home/lyahasik/tst/SDL2-2.0.12/include -idirafter /home/lyahasik/tst/SDL2-2.0.12/src/video/khronos  "
+S["CFLAGS"]="-g -O2 -Iinclude -I/home/lyahasik/debug/SDL2-2.0.12/include -idirafter /home/lyahasik/debug/SDL2-2.0.12/src/video/khronos  "
 S["CC"]="gcc"
 S["host_os"]="linux-gnu"
 S["host_vendor"]="pc"

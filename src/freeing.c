@@ -38,8 +38,7 @@ void	free_doors(t_door *doors)
 		doors = doors->next;
 		free(del);
 	}
-	if (doors)
-		free(doors);
+	free(doors);
 }
 
 int		free_nums(char **nums, int i)
