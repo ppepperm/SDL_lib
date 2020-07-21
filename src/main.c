@@ -58,7 +58,7 @@ static int	check_input(t_data *data, char **argv, int argc)
 	reset_data(data);
 	if (argc != 2)
 	{
-		ft_putstr("Invalid arguments");
+		ft_putstr("Invalid arguments\n");
 		return (0);
 	}
 	else if (!init_data(argv[1], data) || SDL_Init(SDL_INIT_VIDEO) < 0)

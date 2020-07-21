@@ -60,7 +60,6 @@ int		free_line(char *line)
 {
 	if (line)
 		free(line);
-
 	return (0);
 }
 
@@ -68,11 +67,10 @@ void	free_map(t_data *data, int y)
 {
 	if (data->map != NULL)
 	{
-		while (y >= 0) {
+		while (y >= 0)
+		{
 			if (data->map[y])
-			{
 				free(data->map[y]);
-			}
 			y--;
 		}
 		if (data->map)
