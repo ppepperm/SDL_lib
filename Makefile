@@ -18,9 +18,14 @@ OBJ := $(SRC:%.c=%.o)
 CFLAGS := -Wall -Wextra -Werror -I includes
 LIB_FLAG :=  -L libft/ -lft `sdl2-config --libs --cflags` -O0
 LINUX_FLAG := -L libft/ -lft `sdl2-config --libs --cflags` -O0  -lm
+PATH_SDL := ./SDL2-2.0.12
 INCLUDES := includes SDL2
 
 all: $(NAME)
+
+(SDL):
+	cd $(PATH_SDL); ./configure --prefix=$(PATH_SDL)/..; make;
+	make -sC $(PATH_SDL) install
 
 %.o : src/%.c $(INCLUDES)
 		gcc -c $(CFLAGS) -I $(INCLUDES) $SSRC -o
