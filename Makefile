@@ -16,14 +16,14 @@ SRC :=	src/complex.c src/raycast.c src/main.c src/map.c src/doors.c\
 		src/freeing.c src/put.c src/doors_horizontal.c src/doors_vertical.c
 OBJ := $(SRC:%.c=%.o)
 CFLAGS := -Wall -Wextra -Werror -I includes
-LIB_FLAG :=  -L libft/ -lft `sdl2-config --libs --cflags` -O0
-LINUX_FLAG := -L libft/ -lft `sdl2-config --libs --cflags` -O0  -lm
-PATH_SDL := ./SDL2-2.0.12
+LIB_FLAG :=  -L libft/ -lft `./SDL2-2.0.12/sdl2-config --libs --cflags` -O0
+LINUX_FLAG := -L libft/ -lft `./SDL2-2.0.12/sdl2-config --libs --cflags` -O0  -lm
+PATH_SDL := (PWD)/SDL2-2.0.12
 INCLUDES := includes SDL2
 
 all: $(NAME)
 
-(SDL):
+SDL:
 	cd $(PATH_SDL); ./configure --prefix=$(PATH_SDL)/..; make;
 	make -sC $(PATH_SDL) install
 
@@ -31,7 +31,7 @@ all: $(NAME)
 		gcc -c $(CFLAGS) -I $(INCLUDES) $SSRC -o
 		@echo $(SSRC:src/%.c = %)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) SDL
 		@make -C libft
 		@gcc -o $(NAME) $(CFLAGS) $(OBJ) $(LINUX_FLAG)
 		@echo "DONE"
