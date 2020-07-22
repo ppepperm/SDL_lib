@@ -45,9 +45,9 @@ static int	reading_line(t_data *data, char **nums, t_i2 *count)
 	while (nums[count->x])
 	{
 		if (count->x >= data->size.x)
-			return (error_map(data, count->y, "Incorrect width\n")
-				+ free_nums(nums, count->x));
-		data->map[count->y][count->x] = ft_atoi(nums[count->x]);
+			return (error_map(data, count->y,\
+			"Incorrect width\n") + free_nums(nums, count->x));
+			data->map[count->y][count->x] = ft_atoi(nums[count->x]);
 		if ((data->map[count->y][count->x] == 0
 			&& ft_strcmp(nums[count->x], "0") != 0)
 			|| !check_cell(data, *count))
@@ -58,9 +58,9 @@ static int	reading_line(t_data *data, char **nums, t_i2 *count)
 		if (data->map[count->y][count->x] == 10
 			|| data->map[count->y][count->x] == 11)
 			if (!(init_doors(data, *count)))
-				return (error_map(data, count->y, "FTAM\n")
-					+ free_nums(nums, count->x));
-		free(nums[count->x++]);
+				return (error_map(data,\
+				count->y, "FTAM\n") + free_nums(nums, count->x));
+				free(nums[count->x++]);
 	}
 	free(nums);
 	if (count->x != data->size.x)
@@ -80,7 +80,7 @@ int			init_map(t_data *data, int fd)
 	while (get_next_line(fd, &line))
 	{
 		if (++count.y >= data->size.y)
-			return (free_line(line) + error_map(data, --count.y, "Inc heigh\n"));
+			return (free_line(line) + error_map(data, --count.y, "IncHeigh\n"));
 		if (!(data->map[count.y] = (int*)malloc(4 * data->size.x))
 			|| !(nums = ft_strsplit(line, ' ')))
 			return (free_line(line) + error_map(data, count.y, "FTAM\n"));
