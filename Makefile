@@ -24,7 +24,7 @@ INCLUDES := includes SDL2
 all: $(NAME)
 
 SDL:
-	cd $(PATH_SDL); ./configure --prefix=$(PATH_SDL)/..; make;
+	cd $(PATH_SDL); ./configure --prefix=$(PATH_SDL); make;
 	make -sC $(PATH_SDL) install
 
 %.o : src/%.c $(INCLUDES)
