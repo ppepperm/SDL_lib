@@ -132,6 +132,8 @@ int					init_coordinates(t_i2 *complex, int fd);
 int					check_cell(t_data *data, t_i2 count);
 int					error_map(t_data *data, int y, char *message);
 int					error_coordinates(char **nums, char *line);
+int					error_map_nums(t_data *data, t_i2 *count,
+					char **nums, char *message);
 void				free_coordinates(char **nums, char *line);
 void				free_map(t_data *data, int y);
 int					free_nums(char **nums, int i);

@@ -25,3 +25,8 @@ int	error_map(t_data *data, int y, char *message)
 	free_map(data, y);
 	return (0);
 }
+
+int	error_map_nums(t_data *data, t_i2 *count, char **nums, char *message)
+{
+	return (error_map(data, count->y, message) + free_nums(nums, count->x));
+}

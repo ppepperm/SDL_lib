@@ -18,11 +18,6 @@ int		event_keydown(t_data *data, t_player *player, SDL_Event event)
 	{
 		if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 			return (0);
-		if (event.key.keysym.scancode == SDL_SCANCODE_F)
-		{
-			data->map[(int)(data->size.y - 1 - player->pos.y) - 1]
-				[(int)(player->pos.x)] = 1;
-		}
 		if (event.key.keysym.scancode == SDL_SCANCODE_W)
 			player->mov.x = 1;
 		if (event.key.keysym.scancode == SDL_SCANCODE_S)

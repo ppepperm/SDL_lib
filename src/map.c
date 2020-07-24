@@ -45,9 +45,8 @@ static int	reading_line(t_data *data, char **nums, t_i2 *count)
 	while (nums[count->x])
 	{
 		if (count->x >= data->size.x)
-			return (error_map(data, count->y,\
-			"Incorrect width\n") + free_nums(nums, count->x));
-			data->map[count->y][count->x] = ft_atoi(nums[count->x]);
+			return (error_map_nums(data, count, nums, "Incorrect width\n"));
+		data->map[count->y][count->x] = ft_atoi(nums[count->x]);
 		if ((data->map[count->y][count->x] == 0
 			&& ft_strcmp(nums[count->x], "0") != 0)
 			|| !check_cell(data, *count))
@@ -55,12 +54,11 @@ static int	reading_line(t_data *data, char **nums, t_i2 *count)
 			ft_putstr("Incorrect value\n");
 			return (free_nums(nums, count->x));
 		}
-		if (data->map[count->y][count->x] == 10
-			|| data->map[count->y][count->x] == 11)
+		if (data->map[count->y][count->x] == 10\
+		|| data->map[count->y][count->x] == 11)
 			if (!(init_doors(data, *count)))
-				return (error_map(data,\
-				count->y, "FTAM\n") + free_nums(nums, count->x));
-				free(nums[count->x++]);
+				return (error_map_nums(data, count, nums, "FTAM\n"));
+		free(nums[count->x++]);
 	}
 	free(nums);
 	if (count->x != data->size.x)
